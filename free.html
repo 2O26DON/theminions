@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>My Booking Form</title>
+    <style>
+        /* ==================== All styles remain the same as before ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 2rem 1rem;
+            line-height: 1.4;
+        }
+
+        .profile-section {
+            max-width: 650px;
+            margin: 0 auto 1.5rem auto;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 0.75rem auto;
+            background: #e2e8f0;
+            border: 2px solid #d0d7de;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0px;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar svg {
+            width: 60%;
+            height: 60%;
+            fill: #7f8c8d;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.5rem;
+            color: #1a2c3e;
+        }
+
+        .profile-bio {
+            font-size: 0.9rem;
+            color: #6c7a89;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .help-button {
+            margin: 1.5rem auto 0.5rem;
+            display: inline-block;
+        }
+
+        .help-btn {
+            background: #e9ecef;
+            color: #495057;
+            border: 2px solid #ced4da;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 0px;
+            font-family: inherit;
+        }
+
+        .help-btn:hover {
+            background: #dee2e6;
+            border-color: #adb5bd;
+        }
+
+        .form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 1.75rem;
+            border-radius: 0px;
+        }
+
+        .help-center {
+            max-width: 650px;
+            margin: 1.5rem auto 0;
+            background: #f8f9fc;
+            border: 1px solid #e9ecef;
+            padding: 1.25rem;
+            border-radius: 0px;
+            scroll-margin-top: 20px;
+        }
+
+        .help-center h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2c3e50;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 0.5rem;
+        }
+
+        .help-center h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+            color: #2c3e50;
+        }
+
+        .help-center p, .help-center li {
+            font-size: 0.8rem;
+            color: #5a6e7c;
+            line-height: 1.4;
+        }
+
+        .help-center ul {
+            margin-left: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .help-center li {
+            margin-bottom: 0.25rem;
+        }
+
+        .help-center .note {
+            background: #eef2f5;
+            padding: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            border-left: 2px solid #2c3e50;
+        }
+
+        .help-center a {
+            color: #2c6e4a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .help-center a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+            color: #2c3e50;
+        }
+
+        .required {
+            color: #dc3545;
+            margin-left: 2px;
+        }
+
+        input[type="text"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 0.7rem 0.75rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            border: 2px solid #d0d7de;
+            background: white;
+            transition: 0.15s;
+            outline: none;
+            border-radius: 0px;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        .field-hint {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            margin-top: 0.3rem;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .custom-browse-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 0px;
+            white-space: nowrap;
+            z-index: 1;
+            position: relative;
+            height: 100%;
+            min-height: 42px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-browse-btn:hover {
+            background: #1e2f3a;
+        }
+
+        .file-name-display {
+            flex: 1;
+            padding: 0.7rem 0.75rem;
+            background: white;
+            border: 2px solid #d0d7de;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-radius: 0px;
+            transition: all 0.2s ease;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+        }
+
+        .file-name-display.placeholder {
+            color: #9aaebf;
+        }
+
+        .file-input-wrapper.has-file .file-name-display {
+            border-color: #2c6e4a;
+            background: #e8f5e9;
+            color: #1e5a2f;
+            font-weight: 500;
+            box-shadow: 0 0 0 1px rgba(44, 110, 74, 0.2);
+        }
+
+        .file-preview {
+            margin-top: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .preview-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 0px;
+        }
+
+        .preview-placeholder {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 0.25rem 0.6rem;
+            border-radius: 0px;
+        }
+
+        button[type="submit"] {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            transition: background 0.2s, transform 0.05s;
+            font-family: inherit;
+            border-radius: 0px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        button[type="submit"].loading {
+            background: #4a6a7a;
+            cursor: wait;
+            pointer-events: none;
+            color: transparent;
+        }
+
+        button[type="submit"].loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        button[type="submit"].success {
+            background: #2c6e4a;
+            cursor: default;
+        }
+
+        button[type="submit"].error {
+            background: #b33a3a;
+        }
+
+        .error-msg {
+            color: #dc3545;
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+        }
+
+        input.error {
+            border-color: #dc3545;
+        }
+
+        .divider {
+            margin: 1.25rem 0 0.75rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-note {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #8e9aaf;
+            margin-top: 1rem;
+        }
+
+        .section-header {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin: 1rem 0 0.75rem 0;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .section-header:first-of-type {
+            margin-top: 0;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal {
+            background: white;
+            padding: 1.5rem;
+            max-width: 90%;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 0px;
+        }
+
+        .modal-icon {
+            margin-bottom: 1rem;
+        }
+
+        .modal-icon svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .modal p {
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+
+        .modal button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-radius: 0px;
+        }
+
+        .modal button:hover {
+            background: #1e2f3a;
+        }
+
+        .site-footer {
+            max-width: 650px;
+            margin: 2rem auto 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #8e9aaf;
+            border-top: 1px solid #e9ecef;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 550px) {
+            .profile-section, .form-container, .help-center, .site-footer {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .file-input-wrapper {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .custom-browse-btn {
+                width: auto;
+                padding: 0.6rem 1rem;
+            }
+            .file-name-display {
+                width: 100%;
+                order: 2;
+            }
+            .custom-browse-btn {
+                order: 1;
+            }
+        }
+    </style>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <div class="profile-avatar" id="profileAvatar">
+            <!-- Default SVG avatar – will be replaced if custom image is set -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </div>
+        <div class="profile-name">O.G</div>
+        <div class="profile-bio">
+            Welcome to my booking service. Lemme help you with your KNUST application. Please fill out the form below to schedule your appointment. All fields are required. And Payment is 15 GHS.
+        </div>
+        <div class="help-button">
+            <button type="button" class="help-btn" id="helpBtn">I Need Help</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form id="bookingForm" enctype="multipart/form-data">
+            <div class="section-header">Personal Information</div>
+            
+            <div class="form-group">
+                <label>Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" autocomplete="off">
+                <div class="field-hint">Enter your full legal name as it appears on official documents</div>
+                <div class="error-msg" id="nameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 0551234567" autocomplete="off">
+                <div class="field-hint">Focus and type this right - avoid making mistakes</div>
+                <div class="error-msg" id="phoneError"></div>
+            </div>
+
+            <div class="form-group">
+                <label>WhatsApp Number <span class="required">*</span></label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="e.g. 0551234567" autocomplete="off">
+                <div class="field-hint">Whether same as phone or separate number — type it here</div>
+                <div class="error-msg" id="whatsappError"></div>
+            </div>
+
+            <div class="section-header">Required Documents</div>
+            
+            <!-- Passport Photo (Image) -->
+            <div class="form-group">
+                <label>Passport Photo <span class="required">*</span></label>
+                <div class="file-input-wrapper" id="photoWrapper">
+                    <input type="file" id="passportPhoto" name="passportPhoto" accept="image/jpeg,image/png,image/jpg,image/heic">
+                    <div class="file-name-display" id="photoFileNameDisplay">No file chosen</div>
+                    <button type="button" class="custom-browse-btn" id="photoBrowseBtn">Upload</button>
+                </div>
+                <div class="field-hint">Upload a recent passport photo (JPG or PNG, max 5MB)</div>
+                <div class="file-preview" id="photoPreviewArea">
+                    <span class="preview-placeholder">No file chosen</span>
+                </div>
+                <div class="error-msg" id="photoError"></div>
+            </div>
+
+            <!-- High School Certificate (PDF) -->
+            <div class="form-group">
+                <label>High School Certificate <span class="required">*</span></label>
+                <div class="file-input-wrapper" id="certificateWrapper">
+                    <input type="file" id="certificatePdf" name="certificatePdf" accept=".pdf,application/pdf">
+                    <div class="file-name-display" id="certificateFileNameDisplay">No file chosen</div>
+                    <button type="button" class="custom-browse-btn" id="certificateBrowseBtn">Upload</button>
+                </div>
+                <div class="field-hint">Upload your high school certificate (PDF only, max 5MB)</div>
+                <div class="error-msg" id="certificateError"></div>
+            </div>
+
+            <!-- Birth Certificate (PDF) -->
+            <div class="form-group">
+                <label>Birth Certificate <span class="required">*</span></label>
+                <div class="file-input-wrapper" id="birthCertWrapper">
+                    <input type="file" id="birthCert" name="birthCert" accept=".pdf,application/pdf">
+                    <div class="file-name-display" id="birthCertFileNameDisplay">No file chosen</div>
+                    <button type="button" class="custom-browse-btn" id="birthCertBrowseBtn">Upload</button>
+                </div>
+                <div class="field-hint">Upload your birth certificate (PDF only, max 5MB)</div>
+                <div class="error-msg" id="birthCertError"></div>
+            </div>
+
+            <!-- Testimonial / Reference Letter (PDF) -->
+            <div class="form-group">
+                <label>Testimonial / Reference Letter <span class="required">*</span></label>
+                <div class="file-input-wrapper" id="testimonialWrapper">
+                    <input type="file" id="testimonial" name="testimonial" accept=".pdf,application/pdf">
+                    <div class="file-name-display" id="testimonialFileNameDisplay">No file chosen</div>
+                    <button type="button" class="custom-browse-btn" id="testimonialBrowseBtn">Upload</button>
+                </div>
+                <div class="field-hint">Upload a testimonial or reference letter (PDF only, max 5MB)</div>
+                <div class="error-msg" id="testimonialError"></div>
+            </div>
+
+            <!-- National ID Front (PDF) -->
+            <div class="form-group">
+                <label>Ghana Card (Front) <span class="required">*</span></label>
+                <div class="file-input-wrapper" id="nationalIdFrontWrapper">
+                    <input type="file" id="nationalIdFront" name="nationalIdFront" accept=".pdf,application/pdf">
+                    <div class="file-name-display" id="nationalIdFrontFileNameDisplay">No file chosen</div>
+                    <button type="button" class="custom-browse-btn" id="nationalIdFrontBrowseBtn">Upload</button>
+                </div>
+                <div class="field-hint">Upload front side of Ghana Card (PDF only, max 5MB)</div>
+                <div class="error-msg" id="nationalIdFrontError"></div>
+            </div>
+
+            <!-- National ID Back (PDF) -->
+            <div class="form-group">
+                <label>Ghana Card (Back) <span class="required">*</span></label>
+                <div class="file-input-wrapper" id="nationalIdBackWrapper">
+                    <input type="file" id="nationalIdBack" name="nationalIdBack" accept=".pdf,application/pdf">
+                    <div class="file-name-display" id="nationalIdBackFileNameDisplay">No file chosen</div>
+                    <button type="button" class="custom-browse-btn" id="nationalIdBackBrowseBtn">Upload</button>
+                </div>
+                <div class="field-hint">Upload back side of Ghana Card (PDF only, max 5MB)</div>
+                <div class="error-msg" id="nationalIdBackError"></div>
+            </div>
+
+            <button type="submit" id="submitBtn">Submit</button>
+        </form>
+
+        <div class="divider"></div>
+        <div class="footer-note">All documents are required. Payment of 15 GHS is processed securely via Paystack.</div>
+    </div>
+
+    <!-- Help Center -->
+    <div id="helpCenter" class="help-center">
+        <h3>Help Center</h3>
+        <h4>Preparing Your Documents</h4>
+        <ul>
+            <li><strong>Hard copies → Soft copies:</strong> Go ang get your documents professionally scanned by a scanner at a printing shop. Do not use a smartphone scanning app (e.g., Adobe Scan, CamScanner)!</li>
+            <li><strong>File format:</strong> Save as <strong>PDF</strong> for all certificates and IDs. For the passport photo, use <strong>JPG or PNG</strong>.</li>
+            <li><strong>File size:</strong> Each file must be ≤ 5MB. Reduce size by using lower resolution if needed.</li>
+            <li><strong>Naming:</strong> Use descriptive file names (e.g., "John_Doe_Certificate.pdf") to avoid confusion.</li>
+        </ul>
+        <h4>Filling Out the Form</h4>
+        <ul>
+            <li><strong>Full Name:</strong> Enter your legal name exactly as on your ID.</li>
+            <li><strong>Phone / WhatsApp:</strong> Use your active whatsapp line. I'll use WhatsApp for updates and contacting.</li>
+            <li><strong>Passport Photo:</strong> Recent, clear, and facing forward.</li>
+            <li><strong>High School Certificate:</strong> Scanned copy of your certificate or result slip.</li>
+            <li><strong>Birth Certificate:</strong> Official birth record.</li>
+            <li><strong>Testimonial:</strong> A reference letter from a previous employer or institution.</li>
+            <li><strong>Ghana Card:</strong> Both front and back sides, clearly visible. Note that the front and back should all be separated into different pdf files.</li>
+        </ul>
+        <div class="note">
+            💡 Tip: After successful payment and submission, you can edit any field to resubmit if needed. All documents are stored securely in the cloud.
+        </div>
+        <div class="note">
+            📞 Need assistance or have any questions? You can <a href="https://wa.me/0546131590" target="_blank" id="whatsappLink">contact me via WhatsApp</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        © O.G 2026. All rights reserved.
+    </footer>
+
+    <!-- Modal -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-icon" id="modalIcon"></div>
+            <p id="modalMessage"></p>
+            <button id="modalCloseBtn">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfiBh_gxRqDM7m3EcX6xDeYK3ggXE67Pxm7Ju4rUCxvf-A1wKgNI7KxDNkPBMaDQlo/exec";
+        // Replace with your Paystack public key (test or live)
+        const PAYSTACK_PUBLIC_KEY = "pk_test_e56a61953a77319c85edb213d7772b7968a5ebbd";
+        const FIXED_AMOUNT = 0; // in GHS
+
+        // ========== CUSTOM PROFILE PHOTO (OPTIONAL) ==========
+        // Set the full URL or relative path to your image. Leave empty to keep the default SVG.
+        const CUSTOM_PROFILE_IMAGE = "img/profile.jpeg"; // Example: "https://example.com/photo.jpg" or "images/profile.jpg"
+
+        // ==================== DOM Elements ====================
+        const form = document.getElementById('bookingForm');
+        const fullNameInput = document.getElementById('fullName');
+        const phoneInput = document.getElementById('phone');
+        const whatsappInput = document.getElementById('whatsapp');
+        
+        // File inputs
+        const photoInput = document.getElementById('passportPhoto');
+        const certificateInput = document.getElementById('certificatePdf');
+        const birthCertInput = document.getElementById('birthCert');
+        const testimonialInput = document.getElementById('testimonial');
+        const nationalIdFrontInput = document.getElementById('nationalIdFront');
+        const nationalIdBackInput = document.getElementById('nationalIdBack');
+        
+        // Error elements
+        const nameError = document.getElementById('nameError');
+        const phoneError = document.getElementById('phoneError');
+        const whatsappError = document.getElementById('whatsappError');
+        const photoError = document.getElementById('photoError');
+        const certificateError = document.getElementById('certificateError');
+        const birthCertError = document.getElementById('birthCertError');
+        const testimonialError = document.getElementById('testimonialError');
+        const nationalIdFrontError = document.getElementById('nationalIdFrontError');
+        const nationalIdBackError = document.getElementById('nationalIdBackError');
+        
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Preview area only for photo
+        const photoPreviewArea = document.getElementById('photoPreviewArea');
+        
+        // File name displays
+        const photoFileNameDisplay = document.getElementById('photoFileNameDisplay');
+        const certificateFileNameDisplay = document.getElementById('certificateFileNameDisplay');
+        const birthCertFileNameDisplay = document.getElementById('birthCertFileNameDisplay');
+        const testimonialFileNameDisplay = document.getElementById('testimonialFileNameDisplay');
+        const nationalIdFrontFileNameDisplay = document.getElementById('nationalIdFrontFileNameDisplay');
+        const nationalIdBackFileNameDisplay = document.getElementById('nationalIdBackFileNameDisplay');
+        
+        // Wrappers for styling
+        const photoWrapper = document.getElementById('photoWrapper');
+        const certificateWrapper = document.getElementById('certificateWrapper');
+        const birthCertWrapper = document.getElementById('birthCertWrapper');
+        const testimonialWrapper = document.getElementById('testimonialWrapper');
+        const nationalIdFrontWrapper = document.getElementById('nationalIdFrontWrapper');
+        const nationalIdBackWrapper = document.getElementById('nationalIdBackWrapper');
+        
+        // Browse buttons
+        const photoBrowseBtn = document.getElementById('photoBrowseBtn');
+        const certificateBrowseBtn = document.getElementById('certificateBrowseBtn');
+        const birthCertBrowseBtn = document.getElementById('birthCertBrowseBtn');
+        const testimonialBrowseBtn = document.getElementById('testimonialBrowseBtn');
+        const nationalIdFrontBrowseBtn = document.getElementById('nationalIdFrontBrowseBtn');
+        const nationalIdBackBrowseBtn = document.getElementById('nationalIdBackBrowseBtn');
+
+        // Help button and help center
+        const helpBtn = document.getElementById('helpBtn');
+        const helpCenter = document.getElementById('helpCenter');
+
+        // Modal elements
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalIcon = document.getElementById('modalIcon');
+
+        // State for preventing duplicate submission
+        let formSubmitted = false;
+        let originalFormData = null;
+        let isPaying = false; // prevent multiple payment popups
+
+        // ==================== Helper Functions ====================
+        function showError(input, errorElement, message) {
+            errorElement.textContent = message;
+            if (message) {
+                input.classList.add('error');
+            } else {
+                input.classList.remove('error');
+            }
+        }
+
+        function clearErrors() {
+            showError(fullNameInput, nameError, '');
+            showError(phoneInput, phoneError, '');
+            showError(whatsappInput, whatsappError, '');
+            showError(photoInput, photoError, '');
+            showError(certificateInput, certificateError, '');
+            showError(birthCertInput, birthCertError, '');
+            showError(testimonialInput, testimonialError, '');
+            showError(nationalIdFrontInput, nationalIdFrontError, '');
+            showError(nationalIdBackInput, nationalIdBackError, '');
+        }
+
+        function updateFileDisplay(fileInput, fileNameDisplay, wrapper) {
+            const file = fileInput.files[0];
+            if (file) {
+                const truncatedName = file.name.length > 35 ? file.name.substring(0, 32) + '...' : file.name;
+                fileNameDisplay.textContent = truncatedName;
+                fileNameDisplay.classList.remove('placeholder');
+                wrapper.classList.add('has-file');
+            } else {
+                fileNameDisplay.textContent = 'No file chosen';
+                fileNameDisplay.classList.add('placeholder');
+                wrapper.classList.remove('has-file');
+            }
+        }
+
+        function setupFileInput(fileInput, fileNameDisplay, wrapper, browseBtn, isImage = false) {
+            browseBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', () => {
+                updateFileDisplay(fileInput, fileNameDisplay, wrapper);
+                if (isImage) handlePhotoPreview();
+                fileInput.classList.remove('error');
+                const errorMap = {
+                    'passportPhoto': photoError,
+                    'certificatePdf': certificateError,
+                    'birthCert': birthCertError,
+                    'testimonial': testimonialError,
+                    'nationalIdFront': nationalIdFrontError,
+                    'nationalIdBack': nationalIdBackError
+                };
+                if (errorMap[fileInput.id]) errorMap[fileInput.id].textContent = '';
+                enableResubmission();
+            });
+        }
+
+        function handlePhotoPreview() {
+            const file = photoInput.files[0];
+            if (!file) {
+                photoPreviewArea.innerHTML = '<span class="preview-placeholder">No file chosen</span>';
+                return;
+            }
+            if (!file.type.startsWith('image/')) {
+                photoPreviewArea.innerHTML = '<span class="preview-placeholder">Not an image file</span>';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('preview-img');
+                img.style.width = '70px';
+                img.style.height = '70px';
+                img.style.objectFit = 'cover';
+                img.style.border = '1px solid #ddd';
+                img.style.borderRadius = '0px';
+                photoPreviewArea.innerHTML = '';
+                photoPreviewArea.appendChild(img);
+                const nameSpan = document.createElement('span');
+                nameSpan.textContent = ` ${file.name.substring(0, 25)}${file.name.length > 25 ? '...' : ''}`;
+                nameSpan.style.fontSize = '0.7rem';
+                nameSpan.style.color = '#4b5563';
+                nameSpan.style.marginLeft = '5px';
+                photoPreviewArea.appendChild(nameSpan);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Convert a File object to base64 payload for sending
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const data = e.target.result.split(',');
+                    resolve({
+                        fileName: file.name,
+                        mimeType: data[0].match(/:(\w.+);/)[1],
+                        data: data[1]
+                    });
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Capture current form data (text + file names) to detect changes
+        function captureFormData() {
+            return {
+                fullName: fullNameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                whatsapp: whatsappInput.value.trim(),
+                files: {
+                    passportPhoto: photoInput.files[0] ? photoInput.files[0].name : null,
+                    certificate: certificateInput.files[0] ? certificateInput.files[0].name : null,
+                    birthCert: birthCertInput.files[0] ? birthCertInput.files[0].name : null,
+                    testimonial: testimonialInput.files[0] ? testimonialInput.files[0].name : null,
+                    nationalIdFront: nationalIdFrontInput.files[0] ? nationalIdFrontInput.files[0].name : null,
+                    nationalIdBack: nationalIdBackInput.files[0] ? nationalIdBackInput.files[0].name : null,
+                }
+            };
+        }
+
+        // Check if form has changed since last submission
+        function hasFormChanged() {
+            if (!originalFormData) return true;
+            const current = captureFormData();
+            return JSON.stringify(current) !== JSON.stringify(originalFormData);
+        }
+
+        // Enable resubmission after edits
+        function enableResubmission() {
+            if (formSubmitted && hasFormChanged()) {
+                formSubmitted = false;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('success', 'error', 'loading');
+                submitBtn.textContent = 'Submit';
+                submitBtn.style.background = '#2c3e50';
+            }
+        }
+
+        // Show modal with message and icon
+        function showModal(message, isError = false) {
+            modalMessage.textContent = message;
+            if (isError) {
+                modalIcon.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#b33a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                `;
+            } else {
+                modalIcon.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#2c6e4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5"></path>
+                    </svg>
+                `;
+            }
+            modalOverlay.classList.add('active');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        // ==================== Validation Functions ====================
+        function validateName(name) {
+            const trimmed = name.trim();
+            if (trimmed === '') return { valid: false, message: 'Full name is required' };
+            if (trimmed.length < 2) return { valid: false, message: 'Name must be at least 2 characters' };
+            if (trimmed.length > 100) return { valid: false, message: 'Name is too long' };
+            const nameRegex = /^[A-Za-zÀ-ÿ\s\-'.]+$/;
+            if (!nameRegex.test(trimmed)) return { valid: false, message: 'Use letters, spaces, hyphens, or apostrophes only' };
+            return { valid: true, message: '', cleaned: trimmed };
+        }
+
+        function validatePhone(phone) {
+            const trimmed = phone.trim();
+            if (trimmed === '') return { valid: false, message: 'Phone number is required' };
+            const cleaned = trimmed.replace(/[\s\-\(\)\.]/g, '');
+            const phoneRegex = /^\+?[0-9]{7,15}$/;
+            if (!phoneRegex.test(cleaned)) return { valid: false, message: 'Enter a valid phone number (7-15 digits, optional +)' };
+            return { valid: true, message: '' };
+        }
+
+        function validateWhatsapp(whatsapp) {
+            const trimmed = whatsapp.trim();
+            if (trimmed === '') return { valid: false, message: 'WhatsApp number is required' };
+            const cleaned = trimmed.replace(/[\s\-\(\)\.]/g, '');
+            const waRegex = /^\+?[0-9]{7,15}$/;
+            if (!waRegex.test(cleaned)) return { valid: false, message: 'Enter a valid WhatsApp number (7-15 digits, optional +)' };
+            return { valid: true, message: '' };
+        }
+
+        function validatePhoto(file) {
+            if (!file || file.length === 0) return { valid: false, message: 'Passport photo is required' };
+            const selectedFile = file[0];
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/heic'];
+            if (!allowedTypes.includes(selectedFile.type)) return { valid: false, message: 'Only JPG, PNG, or HEIC images are allowed' };
+            const maxSize = 5 * 1024 * 1024;
+            if (selectedFile.size > maxSize) return { valid: false, message: 'File size must be less than 5MB' };
+            return { valid: true, message: '', file: selectedFile };
+        }
+
+        function validatePdf(file, fieldName) {
+            if (!file || file.length === 0) return { valid: false, message: `${fieldName} is required` };
+            const selectedFile = file[0];
+            if (selectedFile.type !== 'application/pdf') return { valid: false, message: 'Only PDF files are allowed' };
+            const maxSize = 5 * 1024 * 1024;
+            if (selectedFile.size > maxSize) return { valid: false, message: 'File size must be less than 5MB' };
+            return { valid: true, message: '', file: selectedFile };
+        }
+
+        // ==================== Submit Form Data to Google Sheets ====================
+        async function submitFormData(paymentReference) {
+            const nameValue = fullNameInput.value;
+            const phoneValue = phoneInput.value;
+            const whatsappValue = whatsappInput.value;
+
+            const payload = {
+                fullName: nameValue.trim(),
+                phone: phoneValue.trim(),
+                whatsapp: whatsappValue.trim(),
+                amount: FIXED_AMOUNT,
+                paymentReference: paymentReference,
+                paymentStatus: "paid"
+            };
+
+            const fileMappings = [
+                { field: 'passportPhoto', fileInput: photoInput, validation: validatePhoto(photoInput.files) },
+                { field: 'highSchoolCertificate', fileInput: certificateInput, validation: validatePdf(certificateInput.files, 'High School Certificate') },
+                { field: 'birthCertificate', fileInput: birthCertInput, validation: validatePdf(birthCertInput.files, 'Birth Certificate') },
+                { field: 'testimonial', fileInput: testimonialInput, validation: validatePdf(testimonialInput.files, 'Testimonial') },
+                { field: 'nationalIdFront', fileInput: nationalIdFrontInput, validation: validatePdf(nationalIdFrontInput.files, 'National ID (Front)') },
+                { field: 'nationalIdBack', fileInput: nationalIdBackInput, validation: validatePdf(nationalIdBackInput.files, 'National ID (Back)') }
+            ];
+
+            for (const mapping of fileMappings) {
+                if (mapping.fileInput.files.length > 0) {
+                    const file = mapping.fileInput.files[0];
+                    const fileObj = await fileToBase64(file);
+                    payload[mapping.field] = fileObj;
+                }
+            }
+
+            // Submit to Google Apps Script
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            // Success UI
+            submitBtn.classList.remove('loading');
+            submitBtn.classList.add('success');
+            submitBtn.textContent = 'Submitted';
+            submitBtn.style.background = '#2c6e4a';
+            
+            originalFormData = captureFormData();
+            formSubmitted = true;
+            
+            showModal(`Booking confirmed! Payment reference: ${paymentReference}. I'll contact you within 24 hours.`, false);
+        }
+
+        // ==================== Paystack Integration ====================
+        function payWithPaystack(e) {
+            e.preventDefault();
+            if (isPaying) return;
+            isPaying = true;
+
+            // Generate a dummy email from the phone number (e.g., +2348012345678@booking.com)
+            const phone = phoneInput.value.trim().replace(/[^0-9+]/g, '');
+            const dummyEmail = `${phone}@booking.com`;
+            
+            let handler = PaystackPop.setup({
+                key: PAYSTACK_PUBLIC_KEY,
+                email: dummyEmail,
+                amount: FIXED_AMOUNT * 100, // in pesewas
+                currency: 'GHS',
+                ref: 'booking_' + Math.floor((Math.random() * 1000000000) + 1),
+                onClose: function() {
+                    isPaying = false;
+                    showModal('Payment window closed. You can try again.', true);
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('loading');
+                    submitBtn.textContent = 'Submit';
+                },
+                callback: function(response) {
+                    isPaying = false;
+                    const reference = response.reference;
+                    // Submit the form data with the reference
+                    submitFormData(reference).catch(err => {
+                        console.error(err);
+                        showModal('Payment succeeded but booking failed: ' + err.message, true);
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('loading');
+                        submitBtn.textContent = 'Submit';
+                    });
+                }
+            });
+
+            handler.openIframe();
+        }
+
+        // ==================== Main Submit Handler ====================
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            if (formSubmitted) {
+                showModal('You have already submitted this form. Edit any field to submit again.', true);
+                return;
+            }
+
+            // Clear previous errors and validate all fields
+            clearErrors();
+            
+            const nameValue = fullNameInput.value;
+            const phoneValue = phoneInput.value;
+            const whatsappValue = whatsappInput.value;
+            const photoFile = photoInput.files;
+            const certificateFile = certificateInput.files;
+            const birthCertFile = birthCertInput.files;
+            const testimonialFile = testimonialInput.files;
+            const nationalIdFrontFile = nationalIdFrontInput.files;
+            const nationalIdBackFile = nationalIdBackInput.files;
+
+            // Run all validations
+            const nameValidation = validateName(nameValue);
+            const phoneValidation = validatePhone(phoneValue);
+            const whatsappValidation = validateWhatsapp(whatsappValue);
+            const photoValidation = validatePhoto(photoFile);
+            const certificateValidation = validatePdf(certificateFile, 'High School Certificate');
+            const birthCertValidation = validatePdf(birthCertFile, 'Birth Certificate');
+            const testimonialValidation = validatePdf(testimonialFile, 'Testimonial');
+            const nationalIdFrontValidation = validatePdf(nationalIdFrontFile, 'National ID (Front)');
+            const nationalIdBackValidation = validatePdf(nationalIdBackFile, 'National ID (Back)');
+
+            let isValid = true;
+            if (!nameValidation.valid) { showError(fullNameInput, nameError, nameValidation.message); isValid = false; }
+            if (!phoneValidation.valid) { showError(phoneInput, phoneError, phoneValidation.message); isValid = false; }
+            if (!whatsappValidation.valid) { showError(whatsappInput, whatsappError, whatsappValidation.message); isValid = false; }
+            if (!photoValidation.valid) { showError(photoInput, photoError, photoValidation.message); isValid = false; }
+            if (!certificateValidation.valid) { showError(certificateInput, certificateError, certificateValidation.message); isValid = false; }
+            if (!birthCertValidation.valid) { showError(birthCertInput, birthCertError, birthCertValidation.message); isValid = false; }
+            if (!testimonialValidation.valid) { showError(testimonialInput, testimonialError, testimonialValidation.message); isValid = false; }
+            if (!nationalIdFrontValidation.valid) { showError(nationalIdFrontInput, nationalIdFrontError, nationalIdFrontValidation.message); isValid = false; }
+            if (!nationalIdBackValidation.valid) { showError(nationalIdBackInput, nationalIdBackError, nationalIdBackValidation.message); isValid = false; }
+
+            if (!isValid) {
+                const firstError = document.querySelector('.error');
+                if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // All validations passed → start payment
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            payWithPaystack(event);
+        }
+
+        // ==================== Reset Form on Page Load ====================
+        function resetForm() {
+            fullNameInput.value = '';
+            phoneInput.value = '';
+            whatsappInput.value = '';
+            
+            photoInput.value = '';
+            certificateInput.value = '';
+            birthCertInput.value = '';
+            testimonialInput.value = '';
+            nationalIdFrontInput.value = '';
+            nationalIdBackInput.value = '';
+            
+            const fileDisplays = [
+                { display: photoFileNameDisplay, wrapper: photoWrapper, preview: photoPreviewArea, isImage: true },
+                { display: certificateFileNameDisplay, wrapper: certificateWrapper, preview: null, isImage: false },
+                { display: birthCertFileNameDisplay, wrapper: birthCertWrapper, preview: null, isImage: false },
+                { display: testimonialFileNameDisplay, wrapper: testimonialWrapper, preview: null, isImage: false },
+                { display: nationalIdFrontFileNameDisplay, wrapper: nationalIdFrontWrapper, preview: null, isImage: false },
+                { display: nationalIdBackFileNameDisplay, wrapper: nationalIdBackWrapper, preview: null, isImage: false }
+            ];
+            
+            fileDisplays.forEach(item => {
+                item.display.textContent = 'No file chosen';
+                item.display.classList.add('placeholder');
+                item.wrapper.classList.remove('has-file');
+                if (item.isImage && item.preview) {
+                    item.preview.innerHTML = '<span class="preview-placeholder">No file chosen</span>';
+                }
+            });
+            
+            clearErrors();
+            
+            formSubmitted = false;
+            originalFormData = null;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('success', 'error', 'loading');
+            submitBtn.textContent = 'Submit';
+            submitBtn.style.background = '#2c3e50';
+            
+            const allInputs = [fullNameInput, phoneInput, whatsappInput, photoInput, certificateInput, birthCertInput, testimonialInput, nationalIdFrontInput, nationalIdBackInput];
+            allInputs.forEach(input => input.classList.remove('error'));
+        }
+
+        // ==================== Setup Event Listeners ====================
+        setupFileInput(photoInput, photoFileNameDisplay, photoWrapper, photoBrowseBtn, true);
+        setupFileInput(certificateInput, certificateFileNameDisplay, certificateWrapper, certificateBrowseBtn, false);
+        setupFileInput(birthCertInput, birthCertFileNameDisplay, birthCertWrapper, birthCertBrowseBtn, false);
+        setupFileInput(testimonialInput, testimonialFileNameDisplay, testimonialWrapper, testimonialBrowseBtn, false);
+        setupFileInput(nationalIdFrontInput, nationalIdFrontFileNameDisplay, nationalIdFrontWrapper, nationalIdFrontBrowseBtn, false);
+        setupFileInput(nationalIdBackInput, nationalIdBackFileNameDisplay, nationalIdBackWrapper, nationalIdBackBrowseBtn, false);
+        
+        photoInput.addEventListener('change', handlePhotoPreview);
+        form.addEventListener('submit', handleSubmit);
+        
+        helpBtn.addEventListener('click', () => {
+            helpCenter.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        
+        const textInputs = [fullNameInput, phoneInput, whatsappInput];
+        textInputs.forEach(input => {
+            input.addEventListener('input', enableResubmission);
+        });
+        
+        fullNameInput.addEventListener('input', () => { if (nameError.textContent) showError(fullNameInput, nameError, ''); });
+        phoneInput.addEventListener('input', () => { if (phoneError.textContent) showError(phoneInput, phoneError, ''); });
+        whatsappInput.addEventListener('input', () => { if (whatsappError.textContent) showError(whatsappInput, whatsappError, ''); });
+        
+        fullNameInput.addEventListener('blur', () => {
+            const val = fullNameInput.value;
+            if (val.trim() !== '') {
+                const result = validateName(val);
+                if (!result.valid) showError(fullNameInput, nameError, result.message);
+            }
+        });
+        phoneInput.addEventListener('blur', () => {
+            const val = phoneInput.value;
+            if (val.trim() !== '') {
+                const result = validatePhone(val);
+                if (!result.valid) showError(phoneInput, phoneError, result.message);
+            }
+        });
+        whatsappInput.addEventListener('blur', () => {
+            const val = whatsappInput.value;
+            if (val.trim() !== '') {
+                const result = validateWhatsapp(val);
+                if (!result.valid) showError(whatsappInput, whatsappError, result.message);
+            }
+        });
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        
+        // ========== Apply custom profile photo if provided ==========
+        const profileAvatarDiv = document.getElementById('profileAvatar');
+        if (CUSTOM_PROFILE_IMAGE && CUSTOM_PROFILE_IMAGE.trim() !== "") {
+            // Replace the inner content with an <img> tag
+            profileAvatarDiv.innerHTML = `<img src="${CUSTOM_PROFILE_IMAGE}" alt="Profile photo">`;
+        }
+        
+        resetForm();
+    </script>
+</body>
+</html>
