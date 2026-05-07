@@ -636,7 +636,7 @@
         const db = getFirestore(app);
         
         // ==================== CONFIG ====================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyiOMdzPvMiw6hG5CRor4PGY79LlPYUOavkLrt9uJ2q4mJguntLHWMFk9np3lydGpgp_g/exec"; // REPLACE WITH YOUR WEB APP URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyIfB5mlFPx033RUQtDcrVPVs0O74VGejsIyygdoy62bfglQ-YOceUhHw6iZX_jR-dy5A/exec"; // REPLACE WITH YOUR WEB APP URL
         const CUSTOM_PROFILE_IMAGE = "img/profile1.jpg"; // Set to "" or a valid URL
         const MAX_FILE_SIZE_MB = 150;
         const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
@@ -721,17 +721,39 @@ END:VCARD`;
             return vCardData;
         }
 
-        function downloadVCard() {
-            const vCard = generateVCard();
-            const blob = new Blob([vCard], { type: "text/vcard" });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "og_tech_support.vcf";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+        // ==================== SHARE OR DOWNLOAD VCARD ====================
+        async function shareOrDownloadVCard() {
+            const vCardData = generateVCard();
+            const blob = new Blob([vCardData], { type: "text/vcard" });
+            const file = new File([blob], "og_tech_support.vcf", { type: "text/vcard" });
+            
+            // Check if Web Share API is supported and can share files
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({
+                        title: "Save Contact",
+                        text: "Add O.G (Tech Support) to your contacts",
+                        files: [file]
+                    });
+                    return true; // user completed share
+                } catch (err) {
+                    console.warn("Share cancelled or failed:", err);
+                    // User might have cancelled – we still consider contact saved?
+                    // For reliability, we do not set saved on cancel.
+                    return false;
+                }
+            } else {
+                // Fallback: download VCF file
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "og_tech_support.vcf";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                return true; // download triggered, assume saved
+            }
         }
 
         // ==================== PROGRESS SIMULATION ====================
@@ -850,8 +872,6 @@ END:VCARD`;
             const file = audioInput.files[0];
             audioPreviewArea.innerHTML = '';
             if (!file) return;
-            // Check if browser can play this audio type
-            const canPlay = audioPreviewArea.firstChild?.play ? true : false;
             if (!file.type.startsWith('audio/') && !ALLOWED_EXTENSIONS.test(file.name)) {
                 audioPreviewArea.innerHTML = '<span class="preview-placeholder">Preview not available (unsupported format)</span>';
                 return;
@@ -954,7 +974,6 @@ END:VCARD`;
         function validateAudio(file) {
             if (!file || file.length === 0) return { valid: false, message: 'Audio file is required' };
             const selectedFile = file[0];
-            // Check MIME type or extension
             const isAllowedType = ALLOWED_AUDIO_TYPES.includes(selectedFile.type) || ALLOWED_EXTENSIONS.test(selectedFile.name);
             if (!isAllowedType) {
                 return { valid: false, message: 'Unsupported audio format. Allowed: MP3, WAV, OGG, AAC, M4A, FLAC, WMA, OPUS, AIFF, AMR, MIDI.' };
@@ -1020,23 +1039,35 @@ END:VCARD`;
             }
         }
 
-        // Contact save handler
-        function handleSaveContact() {
-            downloadVCard();
-            techSupportSaved = true;
-            clearFieldError(null, hintContact);
-            contactDisplay.style.borderColor = '#2563eb';
-            contactDisplay.style.backgroundColor = '#eff6ff';
-            contactDisplay.style.color = '#1e3a8a';
-            const originalText = hintContact.textContent;
-            hintContact.textContent = "✓ Contact saved!";
-            hintContact.style.color = "#2563eb";
-            setTimeout(() => {
-                if (!hintContact.classList.contains('error')) {
-                    hintContact.textContent = originalText;
-                    hintContact.style.color = "";
-                }
-            }, 2000);
+        // Contact save handler – uses share sheet (Android/iOS) or fallback download
+        async function handleSaveContact() {
+            const success = await shareOrDownloadVCard();
+            if (success) {
+                techSupportSaved = true;
+                clearFieldError(null, hintContact);
+                contactDisplay.style.borderColor = '#2563eb';
+                contactDisplay.style.backgroundColor = '#eff6ff';
+                contactDisplay.style.color = '#1e3a8a';
+                const originalText = hintContact.textContent;
+                hintContact.textContent = "✓ Contact saved!";
+                hintContact.style.color = "#2563eb";
+                setTimeout(() => {
+                    if (!hintContact.classList.contains('error')) {
+                        hintContact.textContent = originalText;
+                        hintContact.style.color = "";
+                    }
+                }, 2000);
+            } else {
+                // User cancelled share – do not mark as saved
+                hintContact.textContent = "Sharing cancelled. Please try again.";
+                hintContact.classList.add('error');
+                setTimeout(() => {
+                    if (!techSupportSaved) {
+                        hintContact.textContent = originalHints.contact;
+                        hintContact.classList.remove('error');
+                    }
+                }, 3000);
+            }
         }
 
         // Main handler with progress bar and contact check
