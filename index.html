@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Booking Form – Audio Upload</title>
+    <title>Research – Audio Upload</title>
     <style>
         * {
             margin: 0;
@@ -574,7 +574,7 @@
                 <span class="progress-label" id="progressLabel">Uploading... 0%</span>
             </div>
 
-            <button type="submit" id="submitBtn">Submit Booking</button>
+            <button type="submit" id="submitBtn">Submit Audio</button>
         </form>
 
         <div class="divider"></div>
@@ -593,8 +593,8 @@
         <ul>
             <li><strong>Full Name:</strong> Letters, spaces, hyphens, apostrophes only – no numbers.</li>
             <li><strong>Phone Number:</strong> 9 to 14 digits (you can start with +).</li>
-            <li><strong>Index Number:</strong> Must begin with <code>NTCDGRGN240</code> followed by exactly 3 digits from 001 to 180. Example: <code>NTCDGRGN240001</code> (valid), <code>NTCDGRGN240180</code> (valid), <code>NTCDGRGN240000</code> (invalid), <code>NTCDGRGN240250</code> (invalid).</li>
-            <li><strong>Tech Support Number:</strong> Click "Save" – a contact card will open; tap “Add to Contacts” to save O.G’s number (required).</li>
+            <li><strong>Index Number:</strong> Must begin with <code>NTCDGRGN240</code> followed by exactly 3 digits from 001 to 190. Example: <code>NTCDGRGN240001</code> (valid), <code>NTCDGRGN240190</code> (valid), <code>NTCDGRGN240000</code> (invalid), <code>NTCDGRGN240250</code> (invalid).</li>
+            <li><strong>Tech Support Number:</strong> Click "Save" to add O.G's number to your device contacts (required).</li>
         </ul>
         <div class="note">
             💡 Each index number can be used only once. Duplicate submissions are blocked.
@@ -637,7 +637,7 @@
         
         // ==================== CONFIG ====================
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbFKY2K2yxvGo1ywJA9bJ0mo_1jFHURDPlVPaUFoDvA_pfU_NTqXq0_mx5EtoGL9BANQ/exec"; // REPLACE WITH YOUR WEB APP URL
-        const CUSTOM_PROFILE_IMAGE = "img/profile.jpeg"; // Set to "" or a valid URL
+        const CUSTOM_PROFILE_IMAGE = "img/profile1.jpg"; // Set to "" or a valid URL
         const MAX_FILE_SIZE_MB = 150;
         const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
@@ -711,23 +711,27 @@
         let progressInterval = null;
         let progressPercent = 0;
 
-        // ==================== vCard Generation & Opening ====================
+        // ==================== vCard Generation ====================
         function generateVCard() {
-            return `BEGIN:VCARD
+            const vCardData = `BEGIN:VCARD
 VERSION:3.0
 FN:O.G (Tech Support)
 TEL;TYPE=CELL:05574004385
 END:VCARD`;
+            return vCardData;
         }
 
-        function openContactForSaving() {
+        function downloadVCard() {
             const vCard = generateVCard();
-            // Encode as data URL and open in new tab/window
-            const dataUrl = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vCard);
-            // Use window.open to open the vCard; on mobile it will show the contact card
-            window.open(dataUrl, '_blank');
-            // Alternatively, assign to location.href (though same tab)
-            // window.location.href = dataUrl; // This would replace the current page, so we use _blank
+            const blob = new Blob([vCard], { type: "text/vcard" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "og_tech_support.vcf";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         // ==================== PROGRESS SIMULATION ====================
@@ -846,6 +850,8 @@ END:VCARD`;
             const file = audioInput.files[0];
             audioPreviewArea.innerHTML = '';
             if (!file) return;
+            // Check if browser can play this audio type
+            const canPlay = audioPreviewArea.firstChild?.play ? true : false;
             if (!file.type.startsWith('audio/') && !ALLOWED_EXTENSIONS.test(file.name)) {
                 audioPreviewArea.innerHTML = '<span class="preview-placeholder">Preview not available (unsupported format)</span>';
                 return;
@@ -894,7 +900,7 @@ END:VCARD`;
                 formSubmitted = false;
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('success', 'error', 'loading');
-                submitBtn.textContent = 'Submit Booking';
+                submitBtn.textContent = 'Submit Audio';
                 submitBtn.style.background = '#2563eb';
             }
         }
@@ -941,13 +947,14 @@ END:VCARD`;
             const suffix = trimmed.substring(11);
             if (!/^\d{3}$/.test(suffix)) return { valid: false, message: 'Last 3 characters must be digits' };
             const num = parseInt(suffix, 10);
-            if (num < 1 || num > 180) return { valid: false, message: 'Last 3 digits must be between 001 and 180 (inclusive)' };
+            if (num < 1 || num > 190) return { valid: false, message: 'Last 3 digits must be between 001 and 190 (inclusive)' };
             return { valid: true, message: '' };
         }
 
         function validateAudio(file) {
             if (!file || file.length === 0) return { valid: false, message: 'Audio file is required' };
             const selectedFile = file[0];
+            // Check MIME type or extension
             const isAllowedType = ALLOWED_AUDIO_TYPES.includes(selectedFile.type) || ALLOWED_EXTENSIONS.test(selectedFile.name);
             if (!isAllowedType) {
                 return { valid: false, message: 'Unsupported audio format. Allowed: MP3, WAV, OGG, AAC, M4A, FLAC, WMA, OPUS, AIFF, AMR, MIDI.' };
@@ -1013,23 +1020,23 @@ END:VCARD`;
             }
         }
 
-        // Contact save handler - opens vCard for saving
+        // Contact save handler
         function handleSaveContact() {
-            openContactForSaving();
+            downloadVCard();
             techSupportSaved = true;
             clearFieldError(null, hintContact);
             contactDisplay.style.borderColor = '#2563eb';
             contactDisplay.style.backgroundColor = '#eff6ff';
             contactDisplay.style.color = '#1e3a8a';
             const originalText = hintContact.textContent;
-            hintContact.textContent = "✓ Contact opened – please save it!";
+            hintContact.textContent = "✓ Contact saved!";
             hintContact.style.color = "#2563eb";
             setTimeout(() => {
                 if (!hintContact.classList.contains('error')) {
                     hintContact.textContent = originalText;
                     hintContact.style.color = "";
                 }
-            }, 3000);
+            }, 2000);
         }
 
         // Main handler with progress bar and contact check
@@ -1099,7 +1106,7 @@ END:VCARD`;
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
                 showModal('Submission failed. Please check your internet and try again.', true);
-                submitBtn.textContent = 'Submit Booking';
+                submitBtn.textContent = 'Submit Audio';
                 submitBtn.style.background = '#2563eb';
             }
         }
@@ -1122,7 +1129,7 @@ END:VCARD`;
             originalFormData = null;
             submitBtn.disabled = false;
             submitBtn.classList.remove('success', 'error', 'loading');
-            submitBtn.textContent = 'Submit Booking';
+            submitBtn.textContent = 'Submit Audio';
             submitBtn.style.background = '#2563eb';
             resetProgressSimulation();
         }
