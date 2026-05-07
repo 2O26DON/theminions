@@ -637,7 +637,7 @@
         
         // ==================== CONFIG ====================
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbFKY2K2yxvGo1ywJA9bJ0mo_1jFHURDPlVPaUFoDvA_pfU_NTqXq0_mx5EtoGL9BANQ/exec"; // REPLACE WITH YOUR WEB APP URL
-        const CUSTOM_PROFILE_IMAGE = "img/profile.jpeg"; // Set to "" or a valid URL
+        const CUSTOM_PROFILE_IMAGE = "img/profile1.jpg"; // Set to "" or a valid URL
         const MAX_FILE_SIZE_MB = 150;
         const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
@@ -900,7 +900,7 @@ END:VCARD`;
                 formSubmitted = false;
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('success', 'error', 'loading');
-                submitBtn.textContent = 'Submit Booking';
+                submitBtn.textContent = 'Submit Audio';
                 submitBtn.style.background = '#2563eb';
             }
         }
@@ -1106,7 +1106,7 @@ END:VCARD`;
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
                 showModal('Submission failed. Please check your internet and try again.', true);
-                submitBtn.textContent = 'Submit Booking';
+                submitBtn.textContent = 'Submit Audio';
                 submitBtn.style.background = '#2563eb';
             }
         }
@@ -1129,7 +1129,7 @@ END:VCARD`;
             originalFormData = null;
             submitBtn.disabled = false;
             submitBtn.classList.remove('success', 'error', 'loading');
-            submitBtn.textContent = 'Submit Booking';
+            submitBtn.textContent = 'Submit Audio';
             submitBtn.style.background = '#2563eb';
             resetProgressSimulation();
         }
