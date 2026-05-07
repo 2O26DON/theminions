@@ -29,7 +29,7 @@
             height: 120px;
             margin: 0 auto 0.75rem auto;
             background: #e2e8f0;
-            border: 2px solid #d0d7de;
+            border: 2px solid #cbd5e1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,19 +46,19 @@
         .profile-avatar svg {
             width: 60%;
             height: 60%;
-            fill: #7f8c8d;
+            fill: #64748b;
         }
 
         .profile-name {
             font-size: 1.5rem;
             font-weight: 600;
             margin: 0.75rem 0 0.5rem;
-            color: #1a2c3e;
+            color: #1e293b;
         }
 
         .profile-bio {
             font-size: 0.9rem;
-            color: #6c7a89;
+            color: #475569;
             max-width: 500px;
             margin: 0 auto;
         }
@@ -69,9 +69,9 @@
         }
 
         .help-btn {
-            background: #e9ecef;
-            color: #495057;
-            border: 2px solid #ced4da;
+            background: #e2e8f0;
+            color: #1e293b;
+            border: 2px solid #cbd5e1;
             padding: 0.5rem 1.25rem;
             font-size: 0.85rem;
             font-weight: 500;
@@ -82,8 +82,8 @@
         }
 
         .help-btn:hover {
-            background: #dee2e6;
-            border-color: #adb5bd;
+            background: #cbd5e1;
+            border-color: #94a3b8;
         }
 
         .form-container {
@@ -98,8 +98,8 @@
         .help-center {
             max-width: 650px;
             margin: 1.5rem auto 0;
-            background: #f8f9fc;
-            border: 1px solid #e9ecef;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             padding: 1.25rem;
             border-radius: 0px;
             scroll-margin-top: 20px;
@@ -109,8 +109,8 @@
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
-            color: #2c3e50;
-            border-bottom: 1px solid #e9ecef;
+            color: #1e293b;
+            border-bottom: 1px solid #e2e8f0;
             padding-bottom: 0.5rem;
         }
 
@@ -118,12 +118,12 @@
             font-size: 0.85rem;
             font-weight: 600;
             margin: 1rem 0 0.5rem;
-            color: #2c3e50;
+            color: #1e293b;
         }
 
         .help-center p, .help-center li {
             font-size: 0.8rem;
-            color: #5a6e7c;
+            color: #475569;
             line-height: 1.4;
         }
 
@@ -137,15 +137,15 @@
         }
 
         .help-center .note {
-            background: #eef2f5;
+            background: #eff6ff;
             padding: 0.5rem;
             margin-top: 0.75rem;
             font-size: 0.75rem;
-            border-left: 2px solid #2c3e50;
+            border-left: 2px solid #2563eb;
         }
 
         .help-center a {
-            color: #2c6e4a;
+            color: #2563eb;
             text-decoration: none;
             font-weight: 500;
         }
@@ -163,7 +163,7 @@
             font-weight: 500;
             font-size: 0.85rem;
             margin-bottom: 0.4rem;
-            color: #2c3e50;
+            color: #1e293b;
         }
 
         .required {
@@ -177,7 +177,7 @@
             padding: 0.7rem 0.75rem;
             font-size: 0.95rem;
             font-family: inherit;
-            border: 2px solid #d0d7de;
+            border: 2px solid #cbd5e1;
             background: white;
             transition: 0.15s;
             outline: none;
@@ -186,13 +186,13 @@
 
         input[type="text"]:focus,
         input[type="tel"]:focus {
-            border-color: #4a90e2;
-            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
 
         .field-hint {
             font-size: 0.7rem;
-            color: #7f8c8d;
+            color: #64748b;
             margin-top: 0.3rem;
             transition: color 0.1s;
         }
@@ -200,7 +200,7 @@
             color: #dc3545;
         }
 
-        .file-input-wrapper {
+        .file-input-wrapper, .contact-save-wrapper {
             position: relative;
             display: flex;
             align-items: center;
@@ -220,11 +220,11 @@
             z-index: 2;
         }
 
-        .custom-browse-btn {
-            background: #2c3e50;
+        .custom-browse-btn, .save-btn {
+            background: #2563eb;
             color: white;
             border: none;
-            padding: 0.7rem 1.25rem;
+            padding: 0.7rem 0.5rem;
             font-size: 0.85rem;
             font-weight: 500;
             font-family: inherit;
@@ -238,19 +238,24 @@
             min-height: 42px;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            width: 110px;
         }
 
-        .custom-browse-btn:hover {
-            background: #1e2f3a;
+        .save-btn {
+            background: #2563eb;
+        }
+        .custom-browse-btn:hover, .save-btn:hover {
+            background: #1d4ed8;
         }
 
         .file-name-display {
             flex: 1;
             padding: 0.7rem 0.75rem;
             background: white;
-            border: 2px solid #d0d7de;
+            border: 2px solid #cbd5e1;
             font-size: 0.85rem;
-            color: #2c3e50;
+            color: #1e293b;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -262,15 +267,15 @@
         }
 
         .file-name-display.placeholder {
-            color: #9aaebf;
+            color: #94a3b8;
         }
 
         .file-input-wrapper.has-file .file-name-display {
-            border-color: #2c6e4a;
-            background: #e8f5e9;
-            color: #1e5a2f;
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #1e3a8a;
             font-weight: 500;
-            box-shadow: 0 0 0 1px rgba(44, 110, 74, 0.2);
+            box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
         }
 
         .audio-preview {
@@ -282,17 +287,17 @@
             width: 100%;
             outline: none;
             border-radius: 0px;
-            background: #f8f9fc;
-            border: 2px solid #2c6e4a;
+            background: #f8fafc;
+            border: 2px solid #2563eb;
             padding: 0.5rem;
             box-sizing: border-box;
         }
 
-        /* Progress Bar Styles */
+        /* Progress Bar Styles - blue theme */
         .progress-container {
             margin-top: 1rem;
             width: 100%;
-            background: #e9ecef;
+            background: #f8fafc;
             border-radius: 0px;
             overflow: hidden;
             display: none;
@@ -300,7 +305,7 @@
         .progress-bar {
             width: 0%;
             height: 6px;
-            background: #2c6e4a;
+            background: #2563eb;
             transition: width 0.2s ease;
         }
         .progress-label {
@@ -308,15 +313,15 @@
             text-align: center;
             font-size: 0.7rem;
             margin-top: 0.3rem;
-            color: #2c6e4a;
-            background: #f8f9fc;
+            color: #2563eb;
+            background: #f8fafc;
             padding: 0.2rem;
             border-radius: 0px;
             font-weight: 500;
         }
 
         button[type="submit"] {
-            background: #2c3e50;
+            background: #2563eb;
             color: white;
             border: none;
             width: 100%;
@@ -342,7 +347,7 @@
         }
 
         button[type="submit"].loading {
-            background: #4a6a7a;
+            background: #60a5fa;
             cursor: wait;
             pointer-events: none;
             color: transparent;
@@ -368,7 +373,7 @@
         }
 
         button[type="submit"].success {
-            background: #2c6e4a;
+            background: #2563eb;
             cursor: default;
         }
 
@@ -382,23 +387,23 @@
 
         .divider {
             margin: 1.25rem 0 0.75rem;
-            border-top: 1px solid #e9ecef;
+            border-top: 1px solid #e2e8f0;
         }
 
         .footer-note {
             font-size: 0.7rem;
             text-align: center;
-            color: #8e9aaf;
+            color: #64748b;
             margin-top: 1rem;
         }
 
         .section-header {
             font-weight: 600;
             font-size: 0.9rem;
-            color: #2c3e50;
+            color: #1e293b;
             margin: 1rem 0 0.75rem 0;
             padding-bottom: 0.25rem;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .section-header:first-of-type {
@@ -448,11 +453,11 @@
         .modal p {
             margin-bottom: 1.25rem;
             font-size: 0.95rem;
-            color: #2c3e50;
+            color: #1e293b;
         }
 
         .modal button {
-            background: #2c3e50;
+            background: #2563eb;
             color: white;
             border: none;
             padding: 0.5rem 1.5rem;
@@ -462,7 +467,7 @@
         }
 
         .modal button:hover {
-            background: #1e2f3a;
+            background: #1d4ed8;
         }
 
         .site-footer {
@@ -470,12 +475,12 @@
             margin: 2rem auto 0;
             text-align: center;
             font-size: 0.75rem;
-            color: #8e9aaf;
-            border-top: 1px solid #e9ecef;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
             padding-top: 1.5rem;
         }
 
-        /* Mobile profile size increase */
+        /* Mobile adjustments */
         @media (max-width: 550px) {
             .profile-section, .form-container, .help-center, .site-footer {
                 padding-left: 1rem;
@@ -485,19 +490,19 @@
                 width: 150px;
                 height: 150px;
             }
-            .file-input-wrapper {
+            .file-input-wrapper, .contact-save-wrapper {
                 flex-wrap: wrap;
                 gap: 0.5rem;
             }
-            .custom-browse-btn {
-                width: auto;
-                padding: 0.6rem 1rem;
+            .custom-browse-btn, .save-btn {
+                width: 100px;
+                padding: 0.6rem 0.5rem;
             }
             .file-name-display {
                 width: 100%;
                 order: 2;
             }
-            .custom-browse-btn {
+            .custom-browse-btn, .save-btn {
                 order: 1;
             }
         }
@@ -512,7 +517,7 @@
         </div>
         <div class="profile-name">O.G</div>
         <div class="profile-bio">
-            Welcome to my booking service. Please fill out the form below and upload an audio message (max 150MB). All fields are required.
+            Waddup?... This is where you upload your "Research" audio files for the assignment. Pay attention when entering your details. Open ya aayes!! All fields are required.
         </div>
         <div class="help-button">
             <button type="button" class="help-btn" id="helpBtn">I Need Help</button>
@@ -526,19 +531,19 @@
             <div class="form-group">
                 <label>Full Name <span class="required">*</span></label>
                 <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" autocomplete="off">
-                <div class="field-hint" id="hintFullName">Letters, spaces, hyphens, apostrophes only – no digits or special symbols</div>
+                <div class="field-hint" id="hintFullName">Letters, spaces, hyphens, apostrophes only, no digits or special symbols</div>
             </div>
 
             <div class="form-group">
                 <label>Phone Number <span class="required">*</span></label>
                 <input type="tel" id="phone" name="phone" placeholder="e.g. 0551234567" autocomplete="off">
-                <div class="field-hint" id="hintPhone">9–14 digits (optional + at start)</div>
+                <div class="field-hint" id="hintPhone">Enter a valid phone number...</div>
             </div>
 
             <div class="form-group">
                 <label>Index Number <span class="required">*</span></label>
                 <input type="text" id="indexNumber" name="indexNumber" value="NTCDGRGN240" autocomplete="off">
-                <div class="field-hint" id="hintIndex">Must start with NTCDGRGN240 + exactly 3 digits (001–190, not 000)</div>
+                <div class="field-hint" id="hintIndex">e.g NTCDGRGN240 + exactly 3 digits like 001</div>
             </div>
 
             <div class="section-header">Audio Message</div>
@@ -546,12 +551,22 @@
             <div class="form-group">
                 <label>Audio File <span class="required">*</span></label>
                 <div class="file-input-wrapper" id="audioWrapper">
-                    <input type="file" id="audioFile" name="audioFile" accept=".mp3,.m4a,.wav,.ogg,.aac,.flac,audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/ogg,audio/aac,audio/flac">
+                    <input type="file" id="audioFile" name="audioFile" accept=".mp3,.wav,.ogg,.aac,.m4a,.flac,.wma,.opus,.aiff,.amr,.mid,.midi,audio/mpeg,audio/wav,audio/ogg,audio/aac,audio/mp4,audio/flac,audio/x-ms-wma,audio/opus,audio/aiff,audio/amr,audio/midi">
                     <div class="file-name-display" id="audioFileNameDisplay">No file chosen</div>
                     <button type="button" class="custom-browse-btn" id="audioBrowseBtn">Upload</button>
                 </div>
-                <div class="field-hint" id="hintAudio">MP3, M4A, WAV, OGG, AAC, or FLAC (max 150MB)</div>
+                <div class="field-hint" id="hintAudio">All audio files allowed (max 150MB)</div>
                 <div class="audio-preview" id="audioPreviewArea"></div>
+            </div>
+
+            <div class="section-header">Tech Support Contact</div>
+            <div class="form-group">
+                <label>Save Contact <span class="required">*</span></label>
+                <div class="contact-save-wrapper" id="contactWrapper">
+                    <div class="file-name-display" id="contactDisplay">Save Tech Support's Number (O.G)</div>
+                    <button type="button" class="save-btn" id="saveContactBtn">Save</button>
+                </div>
+                <div class="field-hint" id="hintContact">You must save this contact before submitting</div>
             </div>
 
             <div class="progress-container" id="progressContainer">
@@ -563,28 +578,29 @@
         </form>
 
         <div class="divider"></div>
-        <div class="footer-note">Your information is stored securely. No payment required.</div>
+        <div class="footer-note">Your information is stored securely. 🤗.</div>
     </div>
 
     <div id="helpCenter" class="help-center">
         <h3>Help Center</h3>
         <h4>Recording & Uploading Your Audio</h4>
         <ul>
-            <li><strong>Format:</strong> MP3, M4A, WAV, OGG, AAC, or FLAC are accepted.</li>
+            <li><strong>Format:</strong> All audio files are accepted (MP3, WAV, OGG, AAC, M4A, FLAC, WMA, OPUS, AIFF, AMR, MIDI, etc.).</li>
             <li><strong>Size:</strong> Must be ≤ 150MB. Use a lower bitrate if needed.</li>
-            <li><strong>Content:</strong> Clearly state your name, request, and any relevant details.</li>
+            <li><strong>Content:</strong> Clearly state your name, and any relevant details.</li>
         </ul>
         <h4>Filling Out the Form</h4>
         <ul>
             <li><strong>Full Name:</strong> Letters, spaces, hyphens, apostrophes only – no numbers.</li>
             <li><strong>Phone Number:</strong> 9 to 14 digits (you can start with +).</li>
             <li><strong>Index Number:</strong> Must begin with <code>NTCDGRGN240</code> followed by exactly 3 digits from 001 to 190. Example: <code>NTCDGRGN240001</code> (valid), <code>NTCDGRGN240190</code> (valid), <code>NTCDGRGN240000</code> (invalid), <code>NTCDGRGN240250</code> (invalid).</li>
+            <li><strong>Tech Support Number:</strong> Click "Save" to add O.G's number to your device contacts (required).</li>
         </ul>
         <div class="note">
             💡 Each index number can be used only once. Duplicate submissions are blocked.
         </div>
         <div class="note">
-            📞 Need assistance? <a href="https://wa.me/0546131590" target="_blank">Contact me via WhatsApp</a>
+            📞 Need assistance? <a href="https://wa.me/0557408691" target="_blank">Contact me via WhatsApp</a>
         </div>
     </div>
 
@@ -620,10 +636,31 @@
         const db = getFirestore(app);
         
         // ==================== CONFIG ====================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyehOtiICWM64GU9cyU4vvCSSdWqpY3CEqVXOsJeDghtfsSHeT-oTCpm8G1mT8OBYAT6w/exec"; // REPLACE WITH YOUR WEB APP URL
-        const CUSTOM_PROFILE_IMAGE = "img/profile1.jpg"; // Set to "" or a valid URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbFKY2K2yxvGo1ywJA9bJ0mo_1jFHURDPlVPaUFoDvA_pfU_NTqXq0_mx5EtoGL9BANQ/exec"; // REPLACE WITH YOUR WEB APP URL
+        const CUSTOM_PROFILE_IMAGE = "img/profile.jpeg"; // Set to "" or a valid URL
         const MAX_FILE_SIZE_MB = 150;
         const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+        // List of allowed audio MIME types and extensions for validation
+        const ALLOWED_AUDIO_TYPES = [
+            'audio/mpeg',          // .mp3
+            'audio/wav',           // .wav
+            'audio/x-wav',
+            'audio/ogg',           // .ogg
+            'audio/aac',           // .aac
+            'audio/mp4',           // .m4a
+            'audio/x-m4a',
+            'audio/flac',          // .flac
+            'audio/x-ms-wma',      // .wma
+            'audio/opus',          // .opus
+            'audio/aiff',          // .aiff
+            'audio/x-aiff',
+            'audio/amr',           // .amr
+            'audio/midi',          // .mid/.midi
+            'audio/x-midi'
+        ];
+        
+        const ALLOWED_EXTENSIONS = /\.(mp3|wav|ogg|aac|m4a|flac|wma|opus|aiff|amr|mid|midi)$/i;
 
         // DOM Elements
         const form = document.getElementById('bookingForm');
@@ -631,11 +668,14 @@
         const phoneInput = document.getElementById('phone');
         const indexInput = document.getElementById('indexNumber');
         const audioInput = document.getElementById('audioFile');
+        const saveContactBtn = document.getElementById('saveContactBtn');
+        const contactDisplay = document.getElementById('contactDisplay');
         
         const hintFullName = document.getElementById('hintFullName');
         const hintPhone = document.getElementById('hintPhone');
         const hintIndex = document.getElementById('hintIndex');
         const hintAudio = document.getElementById('hintAudio');
+        const hintContact = document.getElementById('hintContact');
         
         const submitBtn = document.getElementById('submitBtn');
         const audioFileNameDisplay = document.getElementById('audioFileNameDisplay');
@@ -654,18 +694,45 @@
         const progressBar = document.getElementById('progressBar');
         const progressLabel = document.getElementById('progressLabel');
 
+        // State for required contact save
+        let techSupportSaved = false;
+
         // Store original hints
         const originalHints = {
             fullName: hintFullName.textContent,
             phone: hintPhone.textContent,
             index: hintIndex.textContent,
-            audio: hintAudio.textContent
+            audio: hintAudio.textContent,
+            contact: hintContact.textContent
         };
 
         let formSubmitted = false;
         let originalFormData = null;
         let progressInterval = null;
         let progressPercent = 0;
+
+        // ==================== vCard Generation ====================
+        function generateVCard() {
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:O.G (Tech Support)
+TEL;TYPE=CELL:05574004385
+END:VCARD`;
+            return vCardData;
+        }
+
+        function downloadVCard() {
+            const vCard = generateVCard();
+            const blob = new Blob([vCard], { type: "text/vcard" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "og_tech_support.vcf";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
 
         // ==================== PROGRESS SIMULATION ====================
         function updateProgressUI(percent) {
@@ -674,21 +741,18 @@
         }
         
         function startProgressSimulation() {
-            // Reset
             if (progressInterval) clearInterval(progressInterval);
             if (window._fastInterval) clearInterval(window._fastInterval);
             progressPercent = 0;
             updateProgressUI(0);
             progressContainer.style.display = 'block';
             
-            // Fast phase: 0% → 70% in 1.5 seconds (roughly 1% per 21ms, but we'll do steps)
             let fastInterval = setInterval(() => {
                 if (progressPercent >= 70) {
                     clearInterval(fastInterval);
-                    // Start slow phase: 1% every 2 seconds from 71 to 95
                     startSlowPhase();
                 } else {
-                    progressPercent += 2; // jump faster
+                    progressPercent += 2;
                     if (progressPercent > 70) progressPercent = 70;
                     updateProgressUI(progressPercent);
                 }
@@ -700,26 +764,21 @@
                         progressPercent += 1;
                         updateProgressUI(progressPercent);
                     } else {
-                        // Stop at 95% until completion
                         clearInterval(progressInterval);
                         progressInterval = null;
                     }
-                }, 2000); // 2 seconds per 1%
+                }, 2000);
             }
             
-            // Store interval to clear later
             window._fastInterval = fastInterval;
         }
         
         function completeProgressSimulation() {
-            // Clear any ongoing intervals
             if (window._fastInterval) clearInterval(window._fastInterval);
             if (progressInterval) clearInterval(progressInterval);
-            // Jump to 100%
             progressPercent = 100;
             updateProgressUI(100);
             progressLabel.textContent = 'Complete! 100%';
-            // Hide after a short delay (so user sees 100%)
             setTimeout(() => {
                 progressContainer.style.display = 'none';
                 progressBar.style.width = '0%';
@@ -740,17 +799,18 @@
         function showError(input, hintElement, message) {
             hintElement.textContent = message;
             hintElement.classList.add('error');
-            input.classList.add('error');
+            if (input) input.classList.add('error');
         }
 
         function clearFieldError(input, hintElement) {
             if (hintElement.classList.contains('error')) {
                 const fieldKey = hintElement.id === 'hintFullName' ? 'fullName' :
                                  hintElement.id === 'hintPhone' ? 'phone' :
-                                 hintElement.id === 'hintIndex' ? 'index' : 'audio';
+                                 hintElement.id === 'hintIndex' ? 'index' :
+                                 hintElement.id === 'hintAudio' ? 'audio' : 'contact';
                 hintElement.textContent = originalHints[fieldKey];
                 hintElement.classList.remove('error');
-                input.classList.remove('error');
+                if (input) input.classList.remove('error');
             }
         }
 
@@ -759,6 +819,7 @@
             clearFieldError(phoneInput, hintPhone);
             clearFieldError(indexInput, hintIndex);
             clearFieldError(audioInput, hintAudio);
+            clearFieldError(null, hintContact);
         }
 
         function updateFileDisplay(fileInput, fileNameDisplay, wrapper) {
@@ -789,8 +850,10 @@
             const file = audioInput.files[0];
             audioPreviewArea.innerHTML = '';
             if (!file) return;
-            if (!file.type.startsWith('audio/') && !file.name.match(/\.(mp3|m4a|wav|ogg|aac|flac)$/i)) {
-                audioPreviewArea.innerHTML = '<span class="preview-placeholder">Not an audio file</span>';
+            // Check if browser can play this audio type
+            const canPlay = audioPreviewArea.firstChild?.play ? true : false;
+            if (!file.type.startsWith('audio/') && !ALLOWED_EXTENSIONS.test(file.name)) {
+                audioPreviewArea.innerHTML = '<span class="preview-placeholder">Preview not available (unsupported format)</span>';
                 return;
             }
             const audio = document.createElement('audio');
@@ -838,7 +901,7 @@
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('success', 'error', 'loading');
                 submitBtn.textContent = 'Submit Booking';
-                submitBtn.style.background = '#2c3e50';
+                submitBtn.style.background = '#2563eb';
             }
         }
 
@@ -847,7 +910,7 @@
             if (isError) {
                 modalIcon.innerHTML = `<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#b33a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
             } else {
-                modalIcon.innerHTML = `<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#2c6e4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>`;
+                modalIcon.innerHTML = `<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>`;
             }
             modalOverlay.classList.add('active');
         }
@@ -891,13 +954,20 @@
         function validateAudio(file) {
             if (!file || file.length === 0) return { valid: false, message: 'Audio file is required' };
             const selectedFile = file[0];
-            const allowedTypes = ['audio/mpeg', 'audio/mp4', 'audio/x-m4a', 'audio/wav', 'audio/ogg', 'audio/aac', 'audio/flac'];
-            const extMatch = selectedFile.name.match(/\.(mp3|m4a|wav|ogg|aac|flac)$/i);
-            if (!allowedTypes.includes(selectedFile.type) && !extMatch) {
-                return { valid: false, message: 'Only MP3, M4A, WAV, OGG, AAC, or FLAC files are allowed' };
+            // Check MIME type or extension
+            const isAllowedType = ALLOWED_AUDIO_TYPES.includes(selectedFile.type) || ALLOWED_EXTENSIONS.test(selectedFile.name);
+            if (!isAllowedType) {
+                return { valid: false, message: 'Unsupported audio format. Allowed: MP3, WAV, OGG, AAC, M4A, FLAC, WMA, OPUS, AIFF, AMR, MIDI.' };
             }
             if (selectedFile.size > MAX_FILE_SIZE_BYTES) return { valid: false, message: `File size must be less than ${MAX_FILE_SIZE_MB}MB` };
             return { valid: true, message: '', file: selectedFile };
+        }
+
+        function validateContactSaved() {
+            if (!techSupportSaved) {
+                return { valid: false, message: 'You must save Tech Support\'s number before submitting' };
+            }
+            return { valid: true, message: '' };
         }
 
         // Firebase duplicate check
@@ -950,7 +1020,26 @@
             }
         }
 
-        // Main handler with progress bar
+        // Contact save handler
+        function handleSaveContact() {
+            downloadVCard();
+            techSupportSaved = true;
+            clearFieldError(null, hintContact);
+            contactDisplay.style.borderColor = '#2563eb';
+            contactDisplay.style.backgroundColor = '#eff6ff';
+            contactDisplay.style.color = '#1e3a8a';
+            const originalText = hintContact.textContent;
+            hintContact.textContent = "✓ Contact saved!";
+            hintContact.style.color = "#2563eb";
+            setTimeout(() => {
+                if (!hintContact.classList.contains('error')) {
+                    hintContact.textContent = originalText;
+                    hintContact.style.color = "";
+                }
+            }, 2000);
+        }
+
+        // Main handler with progress bar and contact check
         async function handleSubmit(event) {
             event.preventDefault();
             
@@ -966,15 +1055,17 @@
             const phoneVal = validatePhone(phoneInput.value);
             const indexVal = validateIndexNumber(indexInput.value);
             const audioVal = validateAudio(audioInput.files);
+            const contactVal = validateContactSaved();
             
             let isValid = true;
             if (!nameVal.valid) { showError(fullNameInput, hintFullName, nameVal.message); isValid = false; }
             if (!phoneVal.valid) { showError(phoneInput, hintPhone, phoneVal.message); isValid = false; }
             if (!indexVal.valid) { showError(indexInput, hintIndex, indexVal.message); isValid = false; }
             if (!audioVal.valid) { showError(audioInput, hintAudio, audioVal.message); isValid = false; }
+            if (!contactVal.valid) { showError(null, hintContact, contactVal.message); isValid = false; }
             
             if (!isValid) {
-                const firstError = document.querySelector('.error');
+                const firstError = document.querySelector('.error') || document.querySelector('.field-hint.error')?.parentElement?.querySelector('input');
                 if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
@@ -1002,23 +1093,21 @@
             
             if (success) {
                 await markIndexAsUsed(indexNumber);
-                // Complete progress bar (jump to 100%)
                 completeProgressSimulation();
                 submitBtn.classList.remove('loading');
                 submitBtn.classList.add('success');
                 submitBtn.textContent = 'Submitted';
-                submitBtn.style.background = '#2c6e4a';
+                submitBtn.style.background = '#2563eb';
                 originalFormData = captureFormData();
                 formSubmitted = true;
                 showModal('Booking submitted successfully! I will contact you within 24 hours.', false);
             } else {
-                // Error: reset progress bar and re-enable button
                 resetProgressSimulation();
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
                 showModal('Submission failed. Please check your internet and try again.', true);
                 submitBtn.textContent = 'Submit Booking';
-                submitBtn.style.background = '#2c3e50';
+                submitBtn.style.background = '#2563eb';
             }
         }
 
@@ -1031,18 +1120,23 @@
             audioFileNameDisplay.classList.add('placeholder');
             audioWrapper.classList.remove('has-file');
             audioPreviewArea.innerHTML = '';
+            techSupportSaved = false;
+            contactDisplay.style.borderColor = '#cbd5e1';
+            contactDisplay.style.backgroundColor = 'white';
+            contactDisplay.style.color = '#1e293b';
             clearErrors();
             formSubmitted = false;
             originalFormData = null;
             submitBtn.disabled = false;
             submitBtn.classList.remove('success', 'error', 'loading');
             submitBtn.textContent = 'Submit Booking';
-            submitBtn.style.background = '#2c3e50';
+            submitBtn.style.background = '#2563eb';
             resetProgressSimulation();
         }
 
         // Event listeners
         setupFileInput(audioInput, audioFileNameDisplay, audioWrapper, audioBrowseBtn);
+        saveContactBtn.addEventListener('click', handleSaveContact);
         form.addEventListener('submit', handleSubmit);
         helpBtn.addEventListener('click', () => helpCenter.scrollIntoView({ behavior: 'smooth', block: 'start' }));
         
