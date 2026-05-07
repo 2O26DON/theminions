@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Booking Form – Audio Upload</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 2rem 1rem;
+            line-height: 1.4;
+        }
+
+        .profile-section {
+            max-width: 650px;
+            margin: 0 auto 1.5rem auto;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 0.75rem auto;
+            background: #e2e8f0;
+            border: 2px solid #d0d7de;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar svg {
+            width: 60%;
+            height: 60%;
+            fill: #7f8c8d;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.5rem;
+            color: #1a2c3e;
+        }
+
+        .profile-bio {
+            font-size: 0.9rem;
+            color: #6c7a89;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .help-button {
+            margin: 1.5rem auto 0.5rem;
+            display: inline-block;
+        }
+
+        .help-btn {
+            background: #e9ecef;
+            color: #495057;
+            border: 2px solid #ced4da;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 0px;
+            font-family: inherit;
+        }
+
+        .help-btn:hover {
+            background: #dee2e6;
+            border-color: #adb5bd;
+        }
+
+        .form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 1.75rem;
+            border-radius: 0px;
+        }
+
+        .help-center {
+            max-width: 650px;
+            margin: 1.5rem auto 0;
+            background: #f8f9fc;
+            border: 1px solid #e9ecef;
+            padding: 1.25rem;
+            border-radius: 0px;
+            scroll-margin-top: 20px;
+        }
+
+        .help-center h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2c3e50;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 0.5rem;
+        }
+
+        .help-center h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+            color: #2c3e50;
+        }
+
+        .help-center p, .help-center li {
+            font-size: 0.8rem;
+            color: #5a6e7c;
+            line-height: 1.4;
+        }
+
+        .help-center ul {
+            margin-left: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .help-center li {
+            margin-bottom: 0.25rem;
+        }
+
+        .help-center .note {
+            background: #eef2f5;
+            padding: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            border-left: 2px solid #2c3e50;
+        }
+
+        .help-center a {
+            color: #2c6e4a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .help-center a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+            color: #2c3e50;
+        }
+
+        .required {
+            color: #dc3545;
+            margin-left: 2px;
+        }
+
+        input[type="text"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 0.7rem 0.75rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            border: 2px solid #d0d7de;
+            background: white;
+            transition: 0.15s;
+            outline: none;
+            border-radius: 0px;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        .field-hint {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            margin-top: 0.3rem;
+            transition: color 0.1s;
+        }
+        .field-hint.error {
+            color: #dc3545;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .custom-browse-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 0px;
+            white-space: nowrap;
+            z-index: 1;
+            position: relative;
+            height: 100%;
+            min-height: 42px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .custom-browse-btn:hover {
+            background: #1e2f3a;
+        }
+
+        .file-name-display {
+            flex: 1;
+            padding: 0.7rem 0.75rem;
+            background: white;
+            border: 2px solid #d0d7de;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-radius: 0px;
+            transition: all 0.2s ease;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+        }
+
+        .file-name-display.placeholder {
+            color: #9aaebf;
+        }
+
+        .file-input-wrapper.has-file .file-name-display {
+            border-color: #2c6e4a;
+            background: #e8f5e9;
+            color: #1e5a2f;
+            font-weight: 500;
+            box-shadow: 0 0 0 1px rgba(44, 110, 74, 0.2);
+        }
+
+        .audio-preview {
+            margin-top: 0.75rem;
+            width: 100%;
+        }
+        
+        .audio-preview audio {
+            width: 100%;
+            outline: none;
+            border-radius: 0px;
+            background: #f8f9fc;
+            border: 2px solid #2c6e4a;
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            margin-top: 1rem;
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 0px;
+            overflow: hidden;
+            display: none;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 6px;
+            background: #2c6e4a;
+            transition: width 0.2s ease;
+        }
+        .progress-label {
+            display: block;
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+            color: #2c6e4a;
+            background: #f8f9fc;
+            padding: 0.2rem;
+            border-radius: 0px;
+            font-weight: 500;
+        }
+
+        button[type="submit"] {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            transition: background 0.2s, transform 0.05s;
+            font-family: inherit;
+            border-radius: 0px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        button[type="submit"].loading {
+            background: #4a6a7a;
+            cursor: wait;
+            pointer-events: none;
+            color: transparent;
+        }
+
+        button[type="submit"].loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        button[type="submit"].success {
+            background: #2c6e4a;
+            cursor: default;
+        }
+
+        button[type="submit"].error {
+            background: #b33a3a;
+        }
+
+        input.error {
+            border-color: #dc3545;
+        }
+
+        .divider {
+            margin: 1.25rem 0 0.75rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-note {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #8e9aaf;
+            margin-top: 1rem;
+        }
+
+        .section-header {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin: 1rem 0 0.75rem 0;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .section-header:first-of-type {
+            margin-top: 0;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal {
+            background: white;
+            padding: 1.5rem;
+            max-width: 90%;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 0px;
+        }
+
+        .modal-icon {
+            margin-bottom: 1rem;
+        }
+
+        .modal-icon svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .modal p {
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+
+        .modal button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-radius: 0px;
+        }
+
+        .modal button:hover {
+            background: #1e2f3a;
+        }
+
+        .site-footer {
+            max-width: 650px;
+            margin: 2rem auto 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #8e9aaf;
+            border-top: 1px solid #e9ecef;
+            padding-top: 1.5rem;
+        }
+
+        /* Mobile profile size increase */
+        @media (max-width: 550px) {
+            .profile-section, .form-container, .help-center, .site-footer {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .profile-avatar {
+                width: 150px;
+                height: 150px;
+            }
+            .file-input-wrapper {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .custom-browse-btn {
+                width: auto;
+                padding: 0.6rem 1rem;
+            }
+            .file-name-display {
+                width: 100%;
+                order: 2;
+            }
+            .custom-browse-btn {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-section">
+        <div class="profile-avatar" id="profileAvatar">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </div>
+        <div class="profile-name">O.G</div>
+        <div class="profile-bio">
+            Welcome to my booking service. Please fill out the form below and upload an audio message (max 150MB). All fields are required.
+        </div>
+        <div class="help-button">
+            <button type="button" class="help-btn" id="helpBtn">I Need Help</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form id="bookingForm" enctype="multipart/form-data">
+            <div class="section-header">Personal Information</div>
+            
+            <div class="form-group">
+                <label>Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" autocomplete="off">
+                <div class="field-hint" id="hintFullName">Letters, spaces, hyphens, apostrophes only – no digits or special symbols</div>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 0551234567" autocomplete="off">
+                <div class="field-hint" id="hintPhone">9–14 digits (optional + at start)</div>
+            </div>
+
+            <div class="form-group">
+                <label>Index Number <span class="required">*</span></label>
+                <input type="text" id="indexNumber" name="indexNumber" value="NTCDGRGN240" autocomplete="off">
+                <div class="field-hint" id="hintIndex">Must start with NTCDGRGN240 + exactly 3 digits (001–190, not 000)</div>
+            </div>
+
+            <div class="section-header">Audio Message</div>
+            
+            <div class="form-group">
+                <label>Audio File <span class="required">*</span></label>
+                <div class="file-input-wrapper" id="audioWrapper">
+                    <input type="file" id="audioFile" name="audioFile" accept=".mp3,.m4a,.wav,.ogg,.aac,.flac,audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/ogg,audio/aac,audio/flac">
+                    <div class="file-name-display" id="audioFileNameDisplay">No file chosen</div>
+                    <button type="button" class="custom-browse-btn" id="audioBrowseBtn">Upload</button>
+                </div>
+                <div class="field-hint" id="hintAudio">MP3, M4A, WAV, OGG, AAC, or FLAC (max 150MB)</div>
+                <div class="audio-preview" id="audioPreviewArea"></div>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+                <span class="progress-label" id="progressLabel">Uploading... 0%</span>
+            </div>
+
+            <button type="submit" id="submitBtn">Submit Booking</button>
+        </form>
+
+        <div class="divider"></div>
+        <div class="footer-note">Your information is stored securely. No payment required.</div>
+    </div>
+
+    <div id="helpCenter" class="help-center">
+        <h3>Help Center</h3>
+        <h4>Recording & Uploading Your Audio</h4>
+        <ul>
+            <li><strong>Format:</strong> MP3, M4A, WAV, OGG, AAC, or FLAC are accepted.</li>
+            <li><strong>Size:</strong> Must be ≤ 150MB. Use a lower bitrate if needed.</li>
+            <li><strong>Content:</strong> Clearly state your name, request, and any relevant details.</li>
+        </ul>
+        <h4>Filling Out the Form</h4>
+        <ul>
+            <li><strong>Full Name:</strong> Letters, spaces, hyphens, apostrophes only – no numbers.</li>
+            <li><strong>Phone Number:</strong> 9 to 14 digits (you can start with +).</li>
+            <li><strong>Index Number:</strong> Must begin with <code>NTCDGRGN240</code> followed by exactly 3 digits from 001 to 190. Example: <code>NTCDGRGN240001</code> (valid), <code>NTCDGRGN240190</code> (valid), <code>NTCDGRGN240000</code> (invalid), <code>NTCDGRGN240250</code> (invalid).</li>
+        </ul>
+        <div class="note">
+            💡 Each index number can be used only once. Duplicate submissions are blocked.
+        </div>
+        <div class="note">
+            📞 Need assistance? <a href="https://wa.me/0546131590" target="_blank">Contact me via WhatsApp</a>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        © O.G 2026. All rights reserved.
+    </footer>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-icon" id="modalIcon"></div>
+            <p id="modalMessage"></p>
+            <button id="modalCloseBtn">OK</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK and custom script -->
+    <script type="module">
+        // ==================== FIREBASE ====================
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAsl485JqNi4bsdjMuWl3afoP2dehBpAak",
+            authDomain: "booking-duplicate-check.firebaseapp.com",
+            projectId: "booking-duplicate-check",
+            storageBucket: "booking-duplicate-check.firebasestorage.app",
+            messagingSenderId: "147483730240",
+            appId: "1:147483730240:web:9fbff5daf5374e1a249aa5",
+            measurementId: "G-YB8925QL1P"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // ==================== CONFIG ====================
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxngoDMuFDLsyPUYwkGkU1Idpdgn7JDe1rnI3IX7mkoX9IoK6VBmcGyX5pZwPO_yd8OnA/exec"; // REPLACE WITH YOUR WEB APP URL
+        const CUSTOM_PROFILE_IMAGE = "img/profile1.jpg"; // Set to "" or a valid URL
+        const MAX_FILE_SIZE_MB = 150;
+        const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+        // DOM Elements
+        const form = document.getElementById('bookingForm');
+        const fullNameInput = document.getElementById('fullName');
+        const phoneInput = document.getElementById('phone');
+        const indexInput = document.getElementById('indexNumber');
+        const audioInput = document.getElementById('audioFile');
+        
+        const hintFullName = document.getElementById('hintFullName');
+        const hintPhone = document.getElementById('hintPhone');
+        const hintIndex = document.getElementById('hintIndex');
+        const hintAudio = document.getElementById('hintAudio');
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const audioFileNameDisplay = document.getElementById('audioFileNameDisplay');
+        const audioWrapper = document.getElementById('audioWrapper');
+        const audioBrowseBtn = document.getElementById('audioBrowseBtn');
+        const audioPreviewArea = document.getElementById('audioPreviewArea');
+        const helpBtn = document.getElementById('helpBtn');
+        const helpCenter = document.getElementById('helpCenter');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalIcon = document.getElementById('modalIcon');
+        
+        // Progress bar elements
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const progressLabel = document.getElementById('progressLabel');
+
+        // Store original hints
+        const originalHints = {
+            fullName: hintFullName.textContent,
+            phone: hintPhone.textContent,
+            index: hintIndex.textContent,
+            audio: hintAudio.textContent
+        };
+
+        let formSubmitted = false;
+        let originalFormData = null;
+        let progressInterval = null;
+        let progressPercent = 0;
+
+        // ==================== PROGRESS SIMULATION ====================
+        function updateProgressUI(percent) {
+            progressBar.style.width = percent + '%';
+            progressLabel.textContent = `Uploading... ${percent}%`;
+        }
+        
+        function startProgressSimulation() {
+            // Reset
+            if (progressInterval) clearInterval(progressInterval);
+            if (window._fastInterval) clearInterval(window._fastInterval);
+            progressPercent = 0;
+            updateProgressUI(0);
+            progressContainer.style.display = 'block';
+            
+            // Fast phase: 0% → 70% in 1.5 seconds (roughly 1% per 21ms, but we'll do steps)
+            let fastInterval = setInterval(() => {
+                if (progressPercent >= 70) {
+                    clearInterval(fastInterval);
+                    // Start slow phase: 1% every 2 seconds from 71 to 95
+                    startSlowPhase();
+                } else {
+                    progressPercent += 2; // jump faster
+                    if (progressPercent > 70) progressPercent = 70;
+                    updateProgressUI(progressPercent);
+                }
+            }, 30);
+            
+            function startSlowPhase() {
+                progressInterval = setInterval(() => {
+                    if (progressPercent < 95) {
+                        progressPercent += 1;
+                        updateProgressUI(progressPercent);
+                    } else {
+                        // Stop at 95% until completion
+                        clearInterval(progressInterval);
+                        progressInterval = null;
+                    }
+                }, 2000); // 2 seconds per 1%
+            }
+            
+            // Store interval to clear later
+            window._fastInterval = fastInterval;
+        }
+        
+        function completeProgressSimulation() {
+            // Clear any ongoing intervals
+            if (window._fastInterval) clearInterval(window._fastInterval);
+            if (progressInterval) clearInterval(progressInterval);
+            // Jump to 100%
+            progressPercent = 100;
+            updateProgressUI(100);
+            progressLabel.textContent = 'Complete! 100%';
+            // Hide after a short delay (so user sees 100%)
+            setTimeout(() => {
+                progressContainer.style.display = 'none';
+                progressBar.style.width = '0%';
+                progressLabel.textContent = 'Uploading... 0%';
+            }, 800);
+        }
+        
+        function resetProgressSimulation() {
+            if (window._fastInterval) clearInterval(window._fastInterval);
+            if (progressInterval) clearInterval(progressInterval);
+            progressContainer.style.display = 'none';
+            progressBar.style.width = '0%';
+            progressLabel.textContent = 'Uploading... 0%';
+            progressPercent = 0;
+        }
+
+        // ==================== HELPER FUNCTIONS ====================
+        function showError(input, hintElement, message) {
+            hintElement.textContent = message;
+            hintElement.classList.add('error');
+            input.classList.add('error');
+        }
+
+        function clearFieldError(input, hintElement) {
+            if (hintElement.classList.contains('error')) {
+                const fieldKey = hintElement.id === 'hintFullName' ? 'fullName' :
+                                 hintElement.id === 'hintPhone' ? 'phone' :
+                                 hintElement.id === 'hintIndex' ? 'index' : 'audio';
+                hintElement.textContent = originalHints[fieldKey];
+                hintElement.classList.remove('error');
+                input.classList.remove('error');
+            }
+        }
+
+        function clearErrors() {
+            clearFieldError(fullNameInput, hintFullName);
+            clearFieldError(phoneInput, hintPhone);
+            clearFieldError(indexInput, hintIndex);
+            clearFieldError(audioInput, hintAudio);
+        }
+
+        function updateFileDisplay(fileInput, fileNameDisplay, wrapper) {
+            const file = fileInput.files[0];
+            if (file) {
+                const truncatedName = file.name.length > 35 ? file.name.substring(0, 32) + '...' : file.name;
+                fileNameDisplay.textContent = truncatedName;
+                fileNameDisplay.classList.remove('placeholder');
+                wrapper.classList.add('has-file');
+            } else {
+                fileNameDisplay.textContent = 'No file chosen';
+                fileNameDisplay.classList.add('placeholder');
+                wrapper.classList.remove('has-file');
+            }
+        }
+
+        function setupFileInput(fileInput, fileNameDisplay, wrapper, browseBtn) {
+            browseBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', () => {
+                updateFileDisplay(fileInput, fileNameDisplay, wrapper);
+                clearFieldError(fileInput, hintAudio);
+                handleAudioPreview();
+                enableResubmission();
+            });
+        }
+
+        function handleAudioPreview() {
+            const file = audioInput.files[0];
+            audioPreviewArea.innerHTML = '';
+            if (!file) return;
+            if (!file.type.startsWith('audio/') && !file.name.match(/\.(mp3|m4a|wav|ogg|aac|flac)$/i)) {
+                audioPreviewArea.innerHTML = '<span class="preview-placeholder">Not an audio file</span>';
+                return;
+            }
+            const audio = document.createElement('audio');
+            audio.controls = true;
+            const blobUrl = URL.createObjectURL(file);
+            audio.src = blobUrl;
+            audioPreviewArea.appendChild(audio);
+            audio.onended = () => URL.revokeObjectURL(blobUrl);
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const data = e.target.result.split(',');
+                    resolve({
+                        fileName: file.name,
+                        mimeType: data[0].match(/:(\w.+);/)[1],
+                        data: data[1]
+                    });
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function captureFormData() {
+            return {
+                fullName: fullNameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                indexNumber: indexInput.value.trim(),
+                files: { audio: audioInput.files[0] ? audioInput.files[0].name : null }
+            };
+        }
+
+        function hasFormChanged() {
+            if (!originalFormData) return true;
+            const current = captureFormData();
+            return JSON.stringify(current) !== JSON.stringify(originalFormData);
+        }
+
+        function enableResubmission() {
+            if (formSubmitted && hasFormChanged()) {
+                formSubmitted = false;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('success', 'error', 'loading');
+                submitBtn.textContent = 'Submit Booking';
+                submitBtn.style.background = '#2c3e50';
+            }
+        }
+
+        function showModal(message, isError = false) {
+            modalMessage.textContent = message;
+            if (isError) {
+                modalIcon.innerHTML = `<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#b33a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+            } else {
+                modalIcon.innerHTML = `<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#2c6e4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>`;
+            }
+            modalOverlay.classList.add('active');
+        }
+
+        function closeModal() { modalOverlay.classList.remove('active'); }
+
+        // Validations
+        function validateName(name) {
+            const trimmed = name.trim();
+            if (trimmed === '') return { valid: false, message: 'Full name is required' };
+            if (trimmed.length < 2) return { valid: false, message: 'Name must be at least 2 characters' };
+            if (trimmed.length > 100) return { valid: false, message: 'Name is too long' };
+            const nameRegex = /^[A-Za-zÀ-ÿ\s\-']+$/;
+            if (!nameRegex.test(trimmed)) return { valid: false, message: 'No digits or special symbols (only letters, spaces, hyphens, apostrophes)' };
+            return { valid: true, message: '' };
+        }
+
+        function validatePhone(phone) {
+            const trimmed = phone.trim();
+            if (trimmed === '') return { valid: false, message: 'Phone number is required' };
+            const cleaned = trimmed.replace(/[\s\-\(\)\.]/g, '');
+            const digitsOnly = cleaned.replace(/^\+/, '');
+            if (!/^\d+$/.test(digitsOnly)) return { valid: false, message: 'Invalid phone number format' };
+            if (digitsOnly.length < 9 || digitsOnly.length > 14) return { valid: false, message: 'Phone number must have 9–14 digits (after removing spaces/dashes)' };
+            return { valid: true, message: '' };
+        }
+
+        function validateIndexNumber(idx) {
+            const trimmed = idx.trim();
+            if (trimmed === '') return { valid: false, message: 'Index number is required' };
+            if (trimmed.length !== 14) return { valid: false, message: 'Index number must be exactly 14 characters' };
+            const prefix = trimmed.substring(0, 11);
+            if (prefix !== "NTCDGRGN240") return { valid: false, message: 'Index number must start with NTCDGRGN240' };
+            const suffix = trimmed.substring(11);
+            if (!/^\d{3}$/.test(suffix)) return { valid: false, message: 'Last 3 characters must be digits' };
+            const num = parseInt(suffix, 10);
+            if (num < 1 || num > 190) return { valid: false, message: 'Last 3 digits must be between 001 and 190 (inclusive)' };
+            return { valid: true, message: '' };
+        }
+
+        function validateAudio(file) {
+            if (!file || file.length === 0) return { valid: false, message: 'Audio file is required' };
+            const selectedFile = file[0];
+            const allowedTypes = ['audio/mpeg', 'audio/mp4', 'audio/x-m4a', 'audio/wav', 'audio/ogg', 'audio/aac', 'audio/flac'];
+            const extMatch = selectedFile.name.match(/\.(mp3|m4a|wav|ogg|aac|flac)$/i);
+            if (!allowedTypes.includes(selectedFile.type) && !extMatch) {
+                return { valid: false, message: 'Only MP3, M4A, WAV, OGG, AAC, or FLAC files are allowed' };
+            }
+            if (selectedFile.size > MAX_FILE_SIZE_BYTES) return { valid: false, message: `File size must be less than ${MAX_FILE_SIZE_MB}MB` };
+            return { valid: true, message: '', file: selectedFile };
+        }
+
+        // Firebase duplicate check
+        async function isIndexDuplicate(indexNumber) {
+            try {
+                const docRef = doc(db, "usedIndexes", indexNumber);
+                const docSnap = await getDoc(docRef);
+                return docSnap.exists();
+            } catch (error) {
+                console.error("Firebase read error:", error);
+                return false;
+            }
+        }
+
+        async function markIndexAsUsed(indexNumber) {
+            try {
+                const docRef = doc(db, "usedIndexes", indexNumber);
+                await setDoc(docRef, {
+                    createdAt: new Date().toISOString(),
+                    timestamp: Date.now()
+                });
+                return true;
+            } catch (error) {
+                console.error("Firebase write error:", error);
+                return false;
+            }
+        }
+
+        // Submit to Apps Script
+        async function submitFormData() {
+            const payload = {
+                fullName: fullNameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                indexNumber: indexInput.value.trim()
+            };
+            if (audioInput.files.length > 0) {
+                payload.audioFile = await fileToBase64(audioInput.files[0]);
+            }
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                return true;
+            } catch (err) {
+                console.error(err);
+                return false;
+            }
+        }
+
+        // Main handler with progress bar
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            if (formSubmitted) {
+                showModal('You have already submitted this form. Edit any field to submit again.', true);
+                return;
+            }
+            
+            clearErrors();
+            
+            // Validate fields
+            const nameVal = validateName(fullNameInput.value);
+            const phoneVal = validatePhone(phoneInput.value);
+            const indexVal = validateIndexNumber(indexInput.value);
+            const audioVal = validateAudio(audioInput.files);
+            
+            let isValid = true;
+            if (!nameVal.valid) { showError(fullNameInput, hintFullName, nameVal.message); isValid = false; }
+            if (!phoneVal.valid) { showError(phoneInput, hintPhone, phoneVal.message); isValid = false; }
+            if (!indexVal.valid) { showError(indexInput, hintIndex, indexVal.message); isValid = false; }
+            if (!audioVal.valid) { showError(audioInput, hintAudio, audioVal.message); isValid = false; }
+            
+            if (!isValid) {
+                const firstError = document.querySelector('.error');
+                if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            // Duplicate check
+            const indexNumber = indexInput.value.trim();
+            const duplicate = await isIndexDuplicate(indexNumber);
+            if (duplicate) {
+                showModal(`Duplicate Index Number: ${indexNumber} has already been submitted. Please use a different index.`, true);
+                indexInput.classList.add('error');
+                hintIndex.textContent = `This index number has already been used.`;
+                hintIndex.classList.add('error');
+                return;
+            }
+            
+            // Start progress simulation
+            startProgressSimulation();
+            
+            // Disable submit button and show loading style
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            
+            // Perform actual submission
+            const success = await submitFormData();
+            
+            if (success) {
+                await markIndexAsUsed(indexNumber);
+                // Complete progress bar (jump to 100%)
+                completeProgressSimulation();
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success');
+                submitBtn.textContent = 'Submitted';
+                submitBtn.style.background = '#2c6e4a';
+                originalFormData = captureFormData();
+                formSubmitted = true;
+                showModal('Booking submitted successfully! I will contact you within 24 hours.', false);
+            } else {
+                // Error: reset progress bar and re-enable button
+                resetProgressSimulation();
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                showModal('Submission failed. Please check your internet and try again.', true);
+                submitBtn.textContent = 'Submit Booking';
+                submitBtn.style.background = '#2c3e50';
+            }
+        }
+
+        function resetForm() {
+            fullNameInput.value = '';
+            phoneInput.value = '';
+            indexInput.value = 'NTCDGRGN240';
+            audioInput.value = '';
+            audioFileNameDisplay.textContent = 'No file chosen';
+            audioFileNameDisplay.classList.add('placeholder');
+            audioWrapper.classList.remove('has-file');
+            audioPreviewArea.innerHTML = '';
+            clearErrors();
+            formSubmitted = false;
+            originalFormData = null;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('success', 'error', 'loading');
+            submitBtn.textContent = 'Submit Booking';
+            submitBtn.style.background = '#2c3e50';
+            resetProgressSimulation();
+        }
+
+        // Event listeners
+        setupFileInput(audioInput, audioFileNameDisplay, audioWrapper, audioBrowseBtn);
+        form.addEventListener('submit', handleSubmit);
+        helpBtn.addEventListener('click', () => helpCenter.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        
+        fullNameInput.addEventListener('input', () => { clearFieldError(fullNameInput, hintFullName); enableResubmission(); });
+        phoneInput.addEventListener('input', () => { clearFieldError(phoneInput, hintPhone); enableResubmission(); });
+        indexInput.addEventListener('input', () => { clearFieldError(indexInput, hintIndex); enableResubmission(); });
+        audioInput.addEventListener('change', () => { clearFieldError(audioInput, hintAudio); });
+        
+        fullNameInput.addEventListener('blur', () => {
+            const val = fullNameInput.value;
+            if (val.trim()) {
+                const res = validateName(val);
+                if (!res.valid) showError(fullNameInput, hintFullName, res.message);
+                else clearFieldError(fullNameInput, hintFullName);
+            }
+        });
+        phoneInput.addEventListener('blur', () => {
+            const val = phoneInput.value;
+            if (val.trim()) {
+                const res = validatePhone(val);
+                if (!res.valid) showError(phoneInput, hintPhone, res.message);
+                else clearFieldError(phoneInput, hintPhone);
+            }
+        });
+        indexInput.addEventListener('blur', () => {
+            const val = indexInput.value;
+            if (val.trim()) {
+                const res = validateIndexNumber(val);
+                if (!res.valid) showError(indexInput, hintIndex, res.message);
+                else clearFieldError(indexInput, hintIndex);
+            }
+        });
+        
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+        
+        const profileAvatarDiv = document.getElementById('profileAvatar');
+        if (CUSTOM_PROFILE_IMAGE && CUSTOM_PROFILE_IMAGE.trim() !== "") {
+            profileAvatarDiv.innerHTML = `<img src="${CUSTOM_PROFILE_IMAGE}" alt="Profile photo">`;
+        }
+        
+        resetForm();
+    </script>
+</body>
+</html>
